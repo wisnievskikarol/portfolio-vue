@@ -2,7 +2,18 @@
 export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
-    extend: {}
+    extend: {
+      colors: {
+        darkGray: '#505050',
+        veryDarkGray: '#101010',
+        gray: '#ADADAD',
+        lightGray: '#ebebeb',
+        primary: '#FFB22C'
+      }
+    },
+    fontFamily: {
+      sans: ['Manrope']
+    }
   },
   plugins: []
 }
