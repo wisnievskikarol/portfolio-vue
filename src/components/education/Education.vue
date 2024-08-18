@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Section from '@/components/common/Section.vue'
+import EducationItem from './EducationItem.vue'
 
 const educationList = [
   {
@@ -19,13 +20,15 @@ const educationList = [
 
 <template>
   <Section title="🎓 education">
-    <EducationItem
-      v-for="(item, index) in educationList"
-      :key="index"
-      :institution="item.institution"
-      :degreeDuration="item.degreeDuration"
-      :degreeTitle="item.degreeTitle"
-      :specialization="item.specialization"
-    />
+    <div class="flex gap-8 flex-col sm:flex-row">
+      <EducationItem
+        v-for="(item, index) in educationList"
+        :key="index"
+        :institution="item.institution"
+        :degreeDuration="item.degreeDuration"
+        :degreeTitle="item.degreeTitle"
+        :specialization="item.specialization"
+      />
+    </div>
   </Section>
 </template>
