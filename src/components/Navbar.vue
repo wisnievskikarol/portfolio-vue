@@ -3,10 +3,12 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 
 const navigation = [
-  { name: 'About', href: '#', current: true },
-  { name: 'Education', href: '#', current: false },
-  { name: 'Experience', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false }
+  { name: 'About', href: '#about', current: true },
+  { name: 'Education', href: '#education', current: false },
+  { name: 'Experience', href: '#experience', current: false },
+  { name: 'Technologies', href: '#technologies', current: false },
+  { name: 'Projects', href: '#projects', current: false },
+  { name: 'Contact', href: '#contact', current: false }
 ]
 </script>
 
@@ -62,7 +64,7 @@ const navigation = [
           :class="[
             item.current
               ? 'bg-gray-900 text-white'
-              : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+              : 'text-gray hover:bg-gray-700 hover:text-white',
             'block rounded-md px-3 py-2 text-base font-medium'
           ]"
           :aria-current="item.current ? 'page' : undefined"
