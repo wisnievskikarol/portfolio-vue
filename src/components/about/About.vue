@@ -11,7 +11,7 @@ import Section from '@/components/common/Section.vue'
           Hello! I'm Karol Wiśniewski from Toruń, Poland. My passion for computers began in
           childhood, where I first explored simple graphic modifications using Gimp. This interest
           in computer graphics grew throughout high school and led me to discover a love for
-          programming during my university years—a passion that has stayed with me ever since.
+          programming during my university years—a passion that has stayed with me.
         </p>
       </div>
     </div>
