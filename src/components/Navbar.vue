@@ -30,8 +30,10 @@ const navigation = [
         </div>
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex flex-shrink-0 items-center">
-            <img class="h-12 w-auto hidden sm:block" src="../assets/logo.svg" alt="logo" />
-            <img class="h-6 w-auto sm:hidden" src="../assets/logo_mobile.svg" alt="logo" />
+            <RouterLink to="/">
+              <img class="h-12 w-auto hidden sm:block" src="../assets/logo.svg" alt="logo" />
+              <img class="h-6 w-auto sm:hidden" src="../assets/logo_mobile.svg" alt="logo" />
+            </RouterLink>
           </div>
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
