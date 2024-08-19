@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import KarolWisniewskiCV from '@/assets/KarolWisniewski_CV.pdf'
+import IconButton from '@/components/common/IconButton.vue'
 </script>
 
 <template>
@@ -24,7 +25,6 @@ import KarolWisniewskiCV from '@/assets/KarolWisniewski_CV.pdf'
         label="Linkedin"
         to="https://www.linkedin.com/in/karol-wi%C5%9Bniewski-1a9747200/"
       />
-      <IconButton label="GitHub" />
     </div>
   </div>
 </template>
