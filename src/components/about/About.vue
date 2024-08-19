@@ -8,11 +8,10 @@ import Section from '@/components/common/Section.vue'
       <div class="flex gap-4 flex-col">
         <h2 class="text-white text-lg">A few words about me:</h2>
         <p class="text-darkGray text-justify font-light text-base">
-          Hello! My name is Karol Wiśniewski and I come from Toruń, Poland. Since childhood I have
-          been passionate about everything related to computers. I started my adventure with simple
-          graphic modifications in Gimp. Later I continued my adventure with computer graphics
-          through high school until I fell in love with programming at university and that's how it
-          stayed
+          Hello! I'm Karol Wiśniewski from Toruń, Poland. My passion for computers began in
+          childhood, where I first explored simple graphic modifications using Gimp. This interest
+          in computer graphics grew throughout high school and led me to discover a love for
+          programming during my university years—a passion that has stayed with me ever since.
         </p>
       </div>
     </div>
