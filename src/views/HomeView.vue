@@ -10,12 +10,21 @@ import Technologies from '@/components/technologies/Technologies.vue'
 
 <template>
   <main class="flex gap-16 flex-col">
-    <Hero />
-    <About />
-    <Education />
-    <Experience />
-    <Technologies />
-    <Projects />
-    <Contact />
+    <MotionGroup
+      v-motion
+      :initial="{ opacity: 0, y: 50 }"
+      :enter="{ opacity: 1, y: 0 }"
+      :delay="50"
+      :duration="1000"
+      :easing="['easeOutCubic']"
+    >
+      <Hero />
+      <About />
+      <Education />
+      <Experience />
+      <Technologies />
+      <Projects />
+      <Contact />
+    </MotionGroup>
   </main>
 </template>
