@@ -6,8 +6,8 @@ const educationList = [
   {
     institution: 'Łódź University of Technology',
     degreeDuration: '2019 - 2023',
-    degreeTitle: 'Bachelor of Science in Computer Science',
-    specialization: 'Web Technologies'
+    degreeTitle: 'Bachelor of Computer Science',
+    specialization: 'Specialization: Web Technologies'
   },
   {
     institution: 'ZSMEiE',
