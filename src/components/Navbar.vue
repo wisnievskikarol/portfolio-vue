@@ -2,8 +2,9 @@
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 
+// TODO: handle set of current navigation
 const navigation = [
-  { name: 'About', href: '#about', current: true },
+  { name: 'About', href: '#about', current: false },
   { name: 'Education', href: '#education', current: false },
   { name: 'Experience', href: '#experience', current: false },
   { name: 'Technologies', href: '#technologies', current: false },
