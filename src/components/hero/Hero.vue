@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import KarolWisniewskiCV from '@/assets/KarolWisniewski_CV.pdf'
+import KarolWisniewskiCV from '@/assets/KarolWisniewski_CV_EN.pdf'
 import IconButton from '@/components/common/IconButton.vue'
 import MotionWrapper from '@/components/common/MotionWrapper.vue'
 </script>
