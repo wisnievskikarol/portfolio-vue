@@ -20,7 +20,7 @@ const educationList = [
 
 <template>
   <Section id="education" title="🎓 education">
-    <div class="flex gap-8 flex-col sm:flex-row">
+    <div class="text-darkGray border-gray-900 p-4 flex gap-16 flex-col rounded-md">
       <EducationItem
         v-for="(item, index) in educationList"
         :key="index"
