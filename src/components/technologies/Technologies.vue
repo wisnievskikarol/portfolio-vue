@@ -8,6 +8,7 @@ const technologiesList = [
   'Prettier',
   'REST API',
   'Vitest',
+  'BEM',
   'Jest',
   'JavaScript',
   'TypeScript',
@@ -21,7 +22,7 @@ const technologiesList = [
 
 <template>
   <Section id="technologies" title="💻 Technologies">
-    <ol class="flex gap-3 py-4 cursor-default justify-start flex-wrap text-darkGray">
+    <ol class="flex gap-3 py-4 cursor-default justify-center flex-wrap text-darkGray">
       <li
         v-for="(technology, index) in technologiesList"
         :key="index"
