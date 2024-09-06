@@ -5,7 +5,7 @@ defineProps<Job>()
 </script>
 
 <template>
-  <li class="flex gap-1 flex-col">
+  <li class="flex gap-2 flex-col">
     <p class="font-light text-xs">{{ location }}</p>
     <a :href="companyUrl" target="_blank">
       <p
