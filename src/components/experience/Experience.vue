@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Section from '@/components/common/Section.vue'
 import ExperienceItem from './ExperienceItem.vue'
+import Section from '@/components/common/Section.vue'
 import type { Job } from './types'
 
 const jobs: Job[] = [
