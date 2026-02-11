@@ -9,13 +9,13 @@ import Technologies from '@/components/technologies/Technologies.vue'
 </script>
 
 <template>
-  <main class="flex gap-16 flex-col">
+  <main>
     <Hero />
     <About />
-    <Education />
     <Experience />
     <Technologies />
     <Projects />
+    <Education />
     <Contact />
   </main>
 </template>

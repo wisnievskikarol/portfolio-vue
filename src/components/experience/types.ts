@@ -6,4 +6,5 @@ export type Job = {
   position: string
   description?: string
   techStack?: string
+  current?: boolean
 }
