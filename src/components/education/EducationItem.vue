@@ -9,7 +9,7 @@ defineProps<{
 
 <template>
   <div
-    class="education-card group border-t border-white/[0.06] py-6 px-4 -mx-4 hover:bg-white/[0.015] transition-all duration-500 rounded-sm"
+    class="education-card group border-t border-white/[0.06] py-6 px-4 -mx-4 hover:bg-white/[0.015] transition-all duration-500 rounded-xl"
   >
     <div class="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-10">
       <div class="sm:w-44 flex-shrink-0">

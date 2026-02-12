@@ -114,7 +114,7 @@ onMounted(async () => {
               class="tech-pill group relative cursor-default"
             >
               <div
-                class="relative px-5 py-2.5 border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-500 backdrop-blur-sm"
+                class="relative px-5 py-2.5 border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-500 backdrop-blur-sm rounded-full"
               >
                 <span
                   class="text-xs text-white/50 group-hover:text-white/90 transition-colors duration-300 font-normal tracking-wide"
@@ -141,7 +141,7 @@ onMounted(async () => {
               class="tech-pill group relative cursor-default"
             >
               <div
-                class="relative px-4 py-2 border border-white/[0.05] hover:border-white/15 hover:bg-white/[0.02] transition-all duration-500"
+                class="relative px-4 py-2 border border-white/[0.05] hover:border-white/15 hover:bg-white/[0.02] transition-all duration-500 rounded-full"
               >
                 <span
                   class="text-[11px] text-white/30 group-hover:text-white/60 transition-colors duration-300 font-normal tracking-wide"

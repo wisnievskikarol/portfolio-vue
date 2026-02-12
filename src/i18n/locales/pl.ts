@@ -13,7 +13,7 @@ export default {
     description: 'Tworzę aplikacje webowe z dbałością o każdy piksel. Aktualnie w',
     company: 'T-Mobile Polska',
     cta: 'Zobacz projekty',
-    year: '© 2025'
+    year: '© 2026'
   },
   about: {
     label: 'O mnie',

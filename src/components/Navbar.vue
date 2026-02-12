@@ -111,7 +111,10 @@ onUnmounted(() => {
 <template>
   <nav
     ref="navbar"
-    class="fixed top-0 left-0 right-0 z-[100] isolate transition-all duration-700"
+    :class="[
+      'fixed top-0 left-0 right-0 isolate transition-all duration-700',
+      isMenuOpen ? 'z-[1001]' : 'z-[100]'
+    ]"
     :style="{
       backgroundColor: isScrolled ? 'rgba(10, 10, 10, 0.92)' : 'rgba(10, 10, 10, 0.6)',
       backdropFilter: isScrolled ? 'blur(20px) saturate(1.2)' : 'blur(10px)',
@@ -171,7 +174,7 @@ onUnmounted(() => {
           <!-- CTA -->
           <a
             href="#contact"
-            class="group relative text-[11px] text-white/80 border border-white/15 px-6 py-2.5 uppercase tracking-[0.2em] overflow-hidden transition-all duration-500 hover:border-white/30"
+            class="group relative text-[11px] text-white/80 border border-white/15 px-6 py-2.5 uppercase tracking-[0.2em] overflow-hidden transition-all duration-500 hover:border-white/30 rounded-full"
           >
             <span class="relative z-10 group-hover:text-[#0a0a0a] transition-colors duration-500">{{
               t('nav.cta')
@@ -187,23 +190,23 @@ onUnmounted(() => {
           class="md:hidden relative w-10 h-10 flex items-center justify-center"
           @click="toggleMenu"
         >
-          <div class="flex flex-col gap-1.5 w-6">
+          <div class="relative w-6 h-6 flex items-center justify-center">
             <span
               :class="[
-                'block h-px bg-white/80 transition-all duration-300 origin-center',
-                isMenuOpen ? 'rotate-45 translate-y-[3.5px]' : ''
+                'absolute w-6 h-px bg-white/80 transition-all duration-300',
+                isMenuOpen ? 'rotate-45' : '-translate-y-2'
               ]"
             />
             <span
               :class="[
-                'block h-px bg-white/80 transition-all duration-300',
+                'absolute w-6 h-px bg-white/80 transition-all duration-300',
                 isMenuOpen ? 'opacity-0 scale-0' : ''
               ]"
             />
             <span
               :class="[
-                'block h-px bg-white/80 transition-all duration-300 origin-center',
-                isMenuOpen ? '-rotate-45 -translate-y-[3.5px]' : ''
+                'absolute w-6 h-px bg-white/80 transition-all duration-300',
+                isMenuOpen ? '-rotate-45' : 'translate-y-2'
               ]"
             />
           </div>

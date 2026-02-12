@@ -9,7 +9,6 @@ const heroRef = ref<HTMLElement | null>(null)
 const firstName = ref<HTMLElement | null>(null)
 const lastName = ref<HTMLElement | null>(null)
 const roleEl = ref<HTMLElement | null>(null)
-const ruleLine = ref<HTMLElement | null>(null)
 const descEl = ref<HTMLElement | null>(null)
 const ctaEl = ref<HTMLElement | null>(null)
 const yearEl = ref<HTMLElement | null>(null)
@@ -19,56 +18,58 @@ onMounted(async () => {
   await nextTick()
   await new Promise((resolve) => setTimeout(resolve, 100))
 
-  const tl = gsap.timeline({ delay: 0.4 })
+  const tl = gsap.timeline({ delay: 0.3 })
 
-  // First name — outline, from below
-  if (firstName.value) {
+  // Small name - fade in
+  if (firstName.value && lastName.value) {
     tl.from(
-      firstName.value,
+      [firstName.value, lastName.value],
       {
-        y: 160,
+        y: 10,
         opacity: 0,
-        duration: 1.5,
-        ease: 'power4.out'
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power3.out'
       },
       0
     )
   }
 
-  // Last name — solid, slight delay
-  if (lastName.value) {
-    tl.from(
-      lastName.value,
-      {
-        y: 160,
-        opacity: 0,
-        duration: 1.5,
-        ease: 'power4.out'
-      },
-      0.1
-    )
-  }
-
-  // Rule
-  if (ruleLine.value) {
-    tl.from(
-      ruleLine.value,
-      {
-        scaleX: 0,
-        duration: 1.2,
-        ease: 'power3.inOut'
-      },
-      0.7
-    )
-  }
-
-  // Role
+  // Giant role title - slide up
   if (roleEl.value) {
     tl.from(
       roleEl.value,
       {
+        y: 80,
         opacity: 0,
+        duration: 1.2,
+        ease: 'power4.out'
+      },
+      0.2
+    )
+  }
+
+  // Description
+  if (descEl.value) {
+    tl.from(
+      descEl.value,
+      {
+        y: 20,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.out'
+      },
+      0.8
+    )
+  }
+
+  // CTA + Year
+  if (ctaEl.value) {
+    tl.from(
+      ctaEl.value,
+      {
         y: 15,
+        opacity: 0,
         duration: 0.7,
         ease: 'power3.out'
       },
@@ -76,49 +77,7 @@ onMounted(async () => {
     )
   }
 
-  // Year
-  if (yearEl.value) {
-    tl.from(
-      yearEl.value,
-      {
-        opacity: 0,
-        y: 15,
-        duration: 0.7,
-        ease: 'power3.out'
-      },
-      1.05
-    )
-  }
-
-  // Desc
-  if (descEl.value) {
-    tl.from(
-      descEl.value,
-      {
-        opacity: 0,
-        y: 20,
-        duration: 0.7,
-        ease: 'power3.out'
-      },
-      1.15
-    )
-  }
-
-  // CTA
-  if (ctaEl.value) {
-    tl.from(
-      ctaEl.value,
-      {
-        opacity: 0,
-        y: 15,
-        duration: 0.6,
-        ease: 'power3.out'
-      },
-      1.3
-    )
-  }
-
-  // Scroll line
+  // Scroll indicator
   if (scrollLine.value) {
     tl.from(
       scrollLine.value,
@@ -127,15 +86,16 @@ onMounted(async () => {
         duration: 0.5,
         ease: 'power2.out'
       },
-      1.5
+      1.2
     )
 
-    gsap.to(scrollLine.value, {
-      y: 8,
-      duration: 1.8,
+    gsap.to(scrollLine.value.querySelector('.w-px'), {
+      scaleY: 0.6,
+      duration: 1.5,
       ease: 'power1.inOut',
       yoyo: true,
-      repeat: -1
+      repeat: -1,
+      transformOrigin: 'top'
     })
   }
 })
@@ -144,89 +104,82 @@ onMounted(async () => {
 <template>
   <section
     ref="heroRef"
-    class="relative min-h-screen flex flex-col justify-end overflow-hidden px-6 lg:px-10 pb-16 sm:pb-20"
+    class="relative min-h-screen flex items-center overflow-hidden px-6 lg:px-10"
   >
-    <!-- Name block — anchored to bottom -->
-    <div class="max-w-6xl mx-auto w-full">
-      <!-- First name: outline -->
-      <div class="overflow-hidden">
-        <h1
-          ref="firstName"
-          class="text-outline font-serif italic text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[11rem] leading-[0.88] tracking-[-0.04em] cursor-default"
-        >
-          Karol
-        </h1>
-      </div>
+    <!-- Ultra minimal content - centered -->
+    <div class="max-w-7xl mx-auto w-full">
+      <div class="flex flex-col items-center text-center">
+        <!-- Name above - centered -->
+        <div class="flex items-center gap-3 mb-12">
+          <div class="overflow-hidden">
+            <span
+              ref="firstName"
+              class="block text-white/30 text-xs uppercase tracking-[0.3em] font-mono"
+              >Karol</span
+            >
+          </div>
+          <div class="w-px h-3 bg-white/15" />
+          <div class="overflow-hidden">
+            <span
+              ref="lastName"
+              class="block text-white/30 text-xs uppercase tracking-[0.3em] font-mono"
+              >Wiśniewski</span
+            >
+          </div>
+        </div>
 
-      <!-- Last name: solid -->
-      <div class="overflow-hidden -mt-1">
-        <h1
-          ref="lastName"
-          class="font-serif italic text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[11rem] text-white/90 leading-[0.88] tracking-[-0.04em]"
-        >
-          Wiśniewski
-        </h1>
-      </div>
-
-      <!-- Thin rule -->
-      <div ref="ruleLine" class="w-full h-px bg-white/[0.06] mt-8 mb-6 origin-left" />
-
-      <!-- Bottom row: role left, year right -->
-      <div class="flex items-start justify-between gap-8">
-        <div class="flex flex-col gap-4">
-          <span
+        <!-- Giant role - centered -->
+        <div class="overflow-visible py-2">
+          <h1
             ref="roleEl"
-            class="text-white/20 text-[11px] uppercase tracking-[0.35em] font-mono"
-            >{{ t('hero.role') }}</span
+            class="font-display font-medium text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-white leading-[1.05] tracking-[-0.04em]"
           >
+            SOFTWARE<br />
+            ENGINEER
+          </h1>
+        </div>
 
-          <p ref="descEl" class="max-w-sm text-white/20 text-[13px] leading-[1.8] font-light">
+        <!-- Minimal details underneath - centered -->
+        <div class="mt-8 flex flex-col items-center gap-3 max-w-md">
+          <p ref="descEl" class="text-white/40 text-sm font-light leading-relaxed">
             {{ t('hero.description') }}
             <a
               href="https://www.t-mobile.pl/"
               target="_blank"
-              class="text-white/40 hover:text-white transition-colors duration-500 border-b border-white/[0.06] hover:border-white/30 pb-px"
+              class="text-white/60 hover:text-white transition-colors duration-300 underline decoration-white/20 hover:decoration-white/60 underline-offset-2"
               >{{ t('hero.company') }}</a
             >.
           </p>
 
-          <a
-            ref="ctaEl"
-            href="#projects"
-            class="group inline-flex items-center gap-2 text-white/25 hover:text-white/80 transition-all duration-500 mt-1 w-fit"
-          >
-            <span class="font-serif italic text-xl">(</span>
-            <span
-              class="uppercase tracking-[0.2em] text-[10px] font-light border-b border-white/0 group-hover:border-white/20 pb-px transition-all duration-500"
-              >{{ t('hero.cta') }}</span
+          <div ref="ctaEl" class="flex items-center gap-6 mt-2">
+            <a
+              href="#projects"
+              class="text-white/50 hover:text-white text-xs uppercase tracking-[0.25em] transition-colors duration-300 group flex items-center gap-2"
             >
-            <svg
-              class="w-3 h-3 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
-            </svg>
-            <span class="font-serif italic text-xl">)</span>
-          </a>
+              {{ t('hero.cta') }}
+              <svg
+                class="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+            <span ref="yearEl" class="text-white/20 text-xs font-mono">{{ t('hero.year') }}</span>
+          </div>
         </div>
-
-        <span
-          ref="yearEl"
-          class="hidden sm:block text-white/10 text-[11px] uppercase tracking-[0.35em] font-mono pt-0.5"
-          >{{ t('hero.year') }}</span
-        >
       </div>
     </div>
 
-    <!-- Scroll indicator — right edge -->
+    <!-- Minimal scroll indicator -->
     <div
       ref="scrollLine"
-      class="absolute bottom-8 right-6 lg:right-10 flex flex-col items-center gap-3"
+      class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
     >
-      <div class="w-px h-12 bg-gradient-to-b from-white/10 to-transparent" />
+      <span class="text-white/20 text-[10px] uppercase tracking-[0.3em] font-mono">Scroll</span>
+      <div class="w-px h-8 bg-white/10" />
     </div>
   </section>
 </template>

@@ -9,7 +9,7 @@ defineProps<Job>()
 
 <template>
   <div
-    class="experience-card group border-t border-white/[0.06] py-8 px-4 -mx-4 hover:bg-white/[0.015] transition-all duration-500 cursor-default rounded-sm"
+    class="experience-card group border-t border-white/[0.06] py-8 px-4 -mx-4 hover:bg-white/[0.015] transition-all duration-500 cursor-default rounded-xl"
   >
     <div class="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-10">
       <!-- Left: date + location -->
@@ -67,7 +67,7 @@ defineProps<Job>()
           <span
             v-for="tech in techStack.split(', ')"
             :key="tech"
-            class="text-[10px] text-white/20 border border-white/[0.06] px-2.5 py-1 font-normal tracking-wider hover:text-white/40 hover:border-white/10 transition-all duration-300"
+            class="text-[10px] text-white/20 border border-white/[0.06] px-2.5 py-1 font-normal tracking-wider hover:text-white/40 hover:border-white/10 transition-all duration-300 rounded-full"
           >
             {{ tech }}
           </span>

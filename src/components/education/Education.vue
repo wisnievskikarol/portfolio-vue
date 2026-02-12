@@ -84,7 +84,7 @@ onMounted(async () => {
 
       <h2
         ref="headingRef"
-        class="text-2xl sm:text-3xl lg:text-4xl font-normal text-gradient-subtle leading-snug mb-16"
+        class="text-2xl sm:text-3xl lg:text-4xl font-normal text-gradient-subtle leading-snug mb-8"
       >
         {{ t('education.heading') }}
       </h2>

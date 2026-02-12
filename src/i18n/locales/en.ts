@@ -13,7 +13,7 @@ export default {
     description: 'Crafting web applications with attention to every pixel. Currently at',
     company: 'T-Mobile Polska',
     cta: 'View projects',
-    year: '© 2025'
+    year: '© 2026'
   },
   about: {
     label: 'About',

@@ -19,7 +19,7 @@ export default {
     fontFamily: {
       sans: ['Inter', 'system-ui', 'sans-serif'],
       mono: ['JetBrains Mono', 'monospace'],
-      serif: ['DM Serif Display', 'serif']
+      display: ['Clash Display', 'Syne', 'Inter', 'system-ui', 'sans-serif']
     }
   },
   plugins: []

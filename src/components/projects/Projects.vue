@@ -93,11 +93,11 @@ onMounted(async () => {
           class="project-card group relative block"
         >
           <div
-            class="relative overflow-hidden border border-white/[0.06] bg-white/[0.015] hover:border-white/15 transition-all duration-700 h-full"
+            class="relative overflow-hidden border border-white/[0.06] bg-white/[0.015] hover:border-white/15 transition-all duration-700 h-full rounded-2xl"
           >
             <!-- Project visual area -->
             <div
-              class="relative overflow-hidden bg-[#111111] aspect-[4/3] flex items-center justify-center"
+              class="relative overflow-hidden bg-[#111111] aspect-[4/3] flex items-center justify-center rounded-t-2xl"
             >
               <img
                 v-if="project.logo"
@@ -141,7 +141,7 @@ onMounted(async () => {
                 <span
                   v-for="tag in project.tags"
                   :key="tag"
-                  class="text-[10px] text-white/20 border border-white/[0.06] px-2.5 py-1 tracking-wider font-normal hover:text-white/40 hover:border-white/10 transition-all duration-300"
+                  class="text-[10px] text-white/20 border border-white/[0.06] px-2.5 py-1 tracking-wider font-normal hover:text-white/40 hover:border-white/10 transition-all duration-300 rounded-full"
                 >
                   {{ tag }}
                 </span>
