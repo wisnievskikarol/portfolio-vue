@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { gsap, ScrollTrigger } from '@/composables/useGsap'
+
+const { t } = useI18n()
 
 const sectionRef = ref<HTMLElement | null>(null)
 const headingRef = ref<HTMLElement | null>(null)
@@ -48,60 +51,66 @@ onMounted(async () => {
   <section id="contact" ref="sectionRef" class="py-24 sm:py-32 relative">
     <div class="section-divider" />
 
-    <!-- Ambient glow -->
-    <div
-      class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full bg-white/[0.01] blur-[150px] pointer-events-none"
-    />
-
     <div class="max-w-6xl mx-auto px-6 lg:px-10 pt-24 sm:pt-32 relative">
       <div class="flex items-center gap-4 mb-10">
         <div class="w-8 h-px bg-white/15" />
-        <span class="text-white/25 text-[11px] uppercase tracking-[0.4em]">Kontakt</span>
+        <span class="text-white/25 text-[11px] uppercase tracking-[0.4em]">{{
+          t('contact.label')
+        }}</span>
       </div>
 
       <div class="flex flex-col gap-12">
         <div class="contact-line">
           <h2
             ref="headingRef"
-            class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-normal text-gradient leading-[1.1] tracking-[-0.02em]"
+            class="font-serif italic text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-normal text-white/90 leading-[1.1] tracking-[-0.01em] whitespace-pre-line"
           >
-            Porozmawiajmy<br />o Twoim projekcie.
+            {{ t('contact.heading') }}
           </h2>
           <p class="text-white/30 text-[15px] mt-6 font-light max-w-lg leading-[1.8]">
-            Szukasz frontend developera? Chętnie porozmawiam o współpracy. Napisz do mnie lub
-            zadzwoń.
+            {{ t('contact.subtitle') }}
           </p>
         </div>
 
-        <div class="contact-line flex flex-col gap-6 mt-2">
+        <div class="contact-line mt-2">
           <a
             href="mailto:wisniewskikarol@gmail.com"
-            class="group inline-flex items-center gap-4 text-xl sm:text-2xl lg:text-3xl font-light text-white/35 hover:text-white/90 transition-all duration-500"
+            class="group inline-flex items-center gap-3 text-white/40 hover:text-white transition-all duration-500 text-lg sm:text-xl tracking-[0.05em]"
           >
-            <span
-              class="w-2 h-2 rounded-full bg-white/20 group-hover:bg-emerald-400 group-hover:shadow-[0_0_12px_rgba(52,211,153,0.3)] transition-all duration-500"
-            />
-            <span
-              class="border-b border-transparent group-hover:border-white/20 pb-px transition-all duration-500"
-              >wisniewskikarol@gmail.com</span
+            <span class="font-serif italic text-2xl sm:text-3xl lg:text-4xl">(</span>
+            <span class="uppercase tracking-[0.2em] text-[13px] sm:text-[15px] font-light">{{
+              t('contact.cta')
+            }}</span>
+            <svg
+              class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
             >
-          </a>
-
-          <a
-            href="tel:+48-737-909-932"
-            class="group inline-flex items-center gap-4 text-xl sm:text-2xl lg:text-3xl font-light text-white/35 hover:text-white/90 transition-all duration-500"
-          >
-            <span
-              class="w-2 h-2 rounded-full bg-white/20 group-hover:bg-emerald-400 group-hover:shadow-[0_0_12px_rgba(52,211,153,0.3)] transition-all duration-500"
-            />
-            <span
-              class="border-b border-transparent group-hover:border-white/20 pb-px transition-all duration-500"
-              >+48 737 909 932</span
-            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
+            </svg>
+            <span class="font-serif italic text-2xl sm:text-3xl lg:text-4xl">)</span>
           </a>
         </div>
 
-        <div class="contact-line flex items-center gap-8 mt-6">
+        <div class="contact-line flex flex-col sm:flex-row sm:items-center gap-6 mt-4">
+          <a
+            href="mailto:wisniewskikarol@gmail.com"
+            class="text-white/25 hover:text-white/70 transition-colors duration-500 text-sm font-mono tracking-wide"
+          >
+            wisniewskikarol@gmail.com
+          </a>
+          <span class="hidden sm:block w-px h-4 bg-white/[0.06]" />
+          <a
+            href="tel:+48-737-909-932"
+            class="text-white/25 hover:text-white/70 transition-colors duration-500 text-sm font-mono tracking-wide"
+          >
+            +48 737 909 932
+          </a>
+        </div>
+
+        <div class="contact-line flex items-center gap-8 mt-2">
           <a
             href="https://www.linkedin.com/in/karol-wi%C5%9Bniewski-1a9747200/"
             target="_blank"

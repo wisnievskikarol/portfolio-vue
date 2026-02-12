@@ -1,26 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { Job } from './types'
 
+const { t } = useI18n()
+
 defineProps<Job>()
-
-const cardRef = ref<HTMLElement | null>(null)
-
-const onMouseMove = (e: MouseEvent) => {
-  if (!cardRef.value) return
-  const rect = cardRef.value.getBoundingClientRect()
-  const x = e.clientX - rect.left
-  const y = e.clientY - rect.top
-  cardRef.value.style.setProperty('--mouse-x', `${x}px`)
-  cardRef.value.style.setProperty('--mouse-y', `${y}px`)
-}
 </script>
 
 <template>
   <div
-    ref="cardRef"
-    class="experience-card spotlight-card group border-t border-white/[0.06] py-8 px-4 -mx-4 hover:bg-white/[0.015] transition-all duration-500 cursor-default rounded-sm"
-    @mousemove="onMouseMove"
+    class="experience-card group border-t border-white/[0.06] py-8 px-4 -mx-4 hover:bg-white/[0.015] transition-all duration-500 cursor-default rounded-sm"
   >
     <div class="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-10">
       <!-- Left: date + location -->
@@ -34,9 +23,9 @@ const onMouseMove = (e: MouseEvent) => {
             />
             <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
           </span>
-          <span class="text-emerald-400/70 text-[10px] uppercase tracking-[0.2em] font-medium"
-            >Obecnie</span
-          >
+          <span class="text-emerald-400/70 text-[10px] uppercase tracking-[0.2em] font-medium">{{
+            t('experience.current')
+          }}</span>
         </div>
       </div>
 

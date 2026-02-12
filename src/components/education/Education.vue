@@ -1,11 +1,23 @@
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { gsap, ScrollTrigger } from '@/composables/useGsap'
 import EducationItem from './EducationItem.vue'
+
+const { t } = useI18n()
 
 const sectionRef = ref<HTMLElement | null>(null)
 const listRef = ref<HTMLElement | null>(null)
 const headingRef = ref<HTMLElement | null>(null)
+
+const educationList = computed(() => [
+  {
+    institution: t('education.items.0.institution'),
+    degreeDuration: '2019 - 2023',
+    degreeTitle: t('education.items.0.degree'),
+    specialization: t('education.items.0.specialization')
+  }
+])
 
 onMounted(async () => {
   await nextTick()
@@ -56,15 +68,6 @@ onMounted(async () => {
 
   ScrollTrigger.refresh()
 })
-
-const educationList = [
-  {
-    institution: 'Politechnika Łódzka',
-    degreeDuration: '2019 - 2023',
-    degreeTitle: 'Inżynier Informatyki',
-    specialization: 'Specjalizacja: Technologie Webowe'
-  }
-]
 </script>
 
 <template>
@@ -74,14 +77,16 @@ const educationList = [
     <div ref="sectionRef" class="max-w-6xl mx-auto px-6 lg:px-10 pt-24 sm:pt-32">
       <div class="flex items-center gap-4 mb-6">
         <div class="w-8 h-px bg-white/15" />
-        <span class="text-white/25 text-[11px] uppercase tracking-[0.4em]">Edukacja</span>
+        <span class="text-white/25 text-[11px] uppercase tracking-[0.4em]">{{
+          t('education.label')
+        }}</span>
       </div>
 
       <h2
         ref="headingRef"
         class="text-2xl sm:text-3xl lg:text-4xl font-normal text-gradient-subtle leading-snug mb-16"
       >
-        Wykształcenie.
+        {{ t('education.heading') }}
       </h2>
 
       <div ref="listRef" class="flex flex-col">

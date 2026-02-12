@@ -9,7 +9,7 @@ import Technologies from '@/components/technologies/Technologies.vue'
 </script>
 
 <template>
-  <main>
+  <main class="relative z-0">
     <Hero />
     <About />
     <Experience />

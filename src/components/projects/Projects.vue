@@ -1,39 +1,30 @@
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { gsap, ScrollTrigger } from '@/composables/useGsap'
 import GoWeddingLogo from '@/assets/gowedding_logo.svg'
+
+const { t } = useI18n()
 
 const sectionRef = ref<HTMLElement | null>(null)
 const headingRef = ref<HTMLElement | null>(null)
 
-const projects = [
+const projects = computed(() => [
   {
     title: 'GoWedding.online',
-    description:
-      'Platforma do tworzenia spersonalizowanych stron ślubnych. Zbudowana z wykorzystaniem nowoczesnych technologii webowych.',
+    description: t('projects.items.0.description'),
     url: 'https://www.gowedding.online/',
     logo: GoWeddingLogo,
     tags: ['Vue.js', 'TypeScript', 'Tailwind CSS']
   },
   {
     title: 'WedShare',
-    description:
-      'Nowoczesna platforma do udostępniania zdjęć i filmów ze ślubu. Goście mogą wgrywać i dzielić się wspomnieniami w czasie rzeczywistym.',
+    description: t('projects.items.1.description'),
     url: 'https://www.wedshare.app/',
     logo: null,
     tags: ['Vue.js', 'TypeScript', 'Tailwind CSS']
   }
-]
-
-const onCardMouseMove = (e: MouseEvent) => {
-  const card = (e.currentTarget as HTMLElement).querySelector('.project-inner') as HTMLElement
-  if (!card) return
-  const rect = card.getBoundingClientRect()
-  const x = e.clientX - rect.left
-  const y = e.clientY - rect.top
-  card.style.setProperty('--mouse-x', `${x}px`)
-  card.style.setProperty('--mouse-y', `${y}px`)
-}
+])
 
 onMounted(async () => {
   await nextTick()
@@ -81,14 +72,16 @@ onMounted(async () => {
     <div class="max-w-6xl mx-auto px-6 lg:px-10 pt-24 sm:pt-32">
       <div class="flex items-center gap-4 mb-6">
         <div class="w-8 h-px bg-white/15" />
-        <span class="text-white/25 text-[11px] uppercase tracking-[0.4em]">Projekty</span>
+        <span class="text-white/25 text-[11px] uppercase tracking-[0.4em]">{{
+          t('projects.label')
+        }}</span>
       </div>
 
       <h2
         ref="headingRef"
         class="text-2xl sm:text-3xl lg:text-4xl font-normal text-gradient-subtle leading-snug mb-16"
       >
-        Wybrane realizacje.
+        {{ t('projects.heading') }}
       </h2>
 
       <div class="grid sm:grid-cols-2 gap-5">
@@ -98,30 +91,14 @@ onMounted(async () => {
           :href="project.url"
           target="_blank"
           class="project-card group relative block"
-          @mousemove="onCardMouseMove"
         >
           <div
-            class="project-inner spotlight-card relative overflow-hidden border border-white/[0.06] bg-white/[0.015] hover:border-white/15 transition-all duration-700 h-full"
+            class="relative overflow-hidden border border-white/[0.06] bg-white/[0.015] hover:border-white/15 transition-all duration-700 h-full"
           >
             <!-- Project visual area -->
             <div
-              class="relative overflow-hidden bg-[#1a1a1a] aspect-[4/3] flex items-center justify-center"
+              class="relative overflow-hidden bg-[#111111] aspect-[4/3] flex items-center justify-center"
             >
-              <!-- Subtle gradient overlay -->
-              <div
-                class="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-              />
-
-              <!-- Grid pattern background -->
-              <div
-                class="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity duration-700"
-                style="
-                  background-image: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-                  background-size: 30px 30px;
-                "
-              />
-
               <img
                 v-if="project.logo"
                 :src="project.logo"

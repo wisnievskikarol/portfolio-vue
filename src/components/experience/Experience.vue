@@ -1,12 +1,69 @@
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { gsap, ScrollTrigger } from '@/composables/useGsap'
 import ExperienceItem from './ExperienceItem.vue'
 import type { Job } from './types'
 
+const { t } = useI18n()
+
 const sectionRef = ref<HTMLElement | null>(null)
 const listRef = ref<HTMLElement | null>(null)
 const headingRef = ref<HTMLElement | null>(null)
+
+const jobs = computed<Job[]>(() => [
+  {
+    location: t('experience.jobs.0.location'),
+    companyUrl: 'https://www.t-mobile.pl/',
+    companyName: 'T-Mobile Polska',
+    duration: t('experience.jobs.0.duration'),
+    position: t('experience.jobs.0.position'),
+    description: t('experience.jobs.0.description'),
+    techStack: t('experience.jobs.0.techStack'),
+    current: true
+  },
+  {
+    location: t('experience.jobs.1.location'),
+    companyUrl: 'https://housebook-solutions.com/',
+    companyName: 'Housebook Solutions',
+    duration: t('experience.jobs.1.duration'),
+    position: t('experience.jobs.1.position'),
+    description: t('experience.jobs.1.description'),
+    techStack: t('experience.jobs.1.techStack')
+  },
+  {
+    location: t('experience.jobs.2.location'),
+    companyUrl: 'https://mydappwallet.com/',
+    companyName: 'myDappWallet',
+    duration: t('experience.jobs.2.duration'),
+    position: t('experience.jobs.2.position'),
+    description: t('experience.jobs.2.description'),
+    techStack: t('experience.jobs.2.techStack')
+  },
+  {
+    location: t('experience.jobs.3.location'),
+    companyUrl: 'https://lodzsolarteam.p.lodz.pl/',
+    companyName: 'Lodz Solar Team',
+    duration: t('experience.jobs.3.duration'),
+    position: t('experience.jobs.3.position'),
+    description: t('experience.jobs.3.description'),
+    techStack: t('experience.jobs.3.techStack')
+  },
+  {
+    location: t('experience.jobs.4.location'),
+    companyUrl: 'https://lea24.pl/',
+    companyName: 'LEA24',
+    duration: t('experience.jobs.4.duration'),
+    position: t('experience.jobs.4.position')
+  },
+  {
+    location: t('experience.jobs.5.location'),
+    companyName: 'EXTRANET',
+    companyUrl: 'https://www.extranet.pl/',
+    duration: t('experience.jobs.5.duration'),
+    position: t('experience.jobs.5.position')
+  }
+])
 
 onMounted(async () => {
   await nextTick()
@@ -57,63 +114,6 @@ onMounted(async () => {
 
   ScrollTrigger.refresh()
 })
-
-const jobs: Job[] = [
-  {
-    location: 'Warszawa, Woj. Mazowieckie, Polska · Praca hybrydowa',
-    companyUrl: 'https://www.t-mobile.pl/',
-    companyName: 'T-Mobile Polska',
-    duration: 'paź 2024 – obecnie · 1 rok 5 mies.',
-    position: 'Mid Frontend Developer',
-    description:
-      'Building and maintaining scalable frontend solutions for one of the largest telecommunications companies in Poland.',
-    techStack: 'Vue 3, TypeScript, Tailwind CSS, REST API, Git',
-    current: true
-  },
-  {
-    location: 'Austria • Graz / Remote',
-    companyUrl: 'https://housebook-solutions.com/',
-    companyName: 'Housebook Solutions',
-    duration: 'May 2023 - September 2024',
-    position: 'Vue Frontend Developer',
-    description:
-      'Development of Housebook Control - digital documentation for managing the creation of investment process.',
-    techStack:
-      'Vue 3 (Composition API), Pinia, Vitest, TypeScript, Storybook, Tailwind CSS, GitHub, GIT'
-  },
-  {
-    location: 'Poland • Warsaw / Remote',
-    companyUrl: 'https://mydappwallet.com/',
-    companyName: 'myDappWallet',
-    duration: 'July 2022 - February 2023',
-    position: 'Frontend Developer (React)',
-    description: 'Development of a cryptocurrency payment wallet',
-    techStack: 'React, TypeScript, Web3'
-  },
-  {
-    location: 'Lodz • Lodz Solar Team',
-    companyUrl: 'https://lodzsolarteam.p.lodz.pl/',
-    companyName: 'Lodz Solar Team',
-    duration: 'February 2022 - June 2022',
-    position: 'Frontend Developer (React)',
-    description: 'Development of a telemetry application for solar racing car',
-    techStack: 'React, TypeScript, GraphQL, SCSS, GitLab'
-  },
-  {
-    location: 'Torun • LEA24',
-    companyUrl: 'https://lea24.pl/',
-    companyName: 'LEA24',
-    duration: 'March 2021 - July 2022',
-    position: 'JS Frontend Developer'
-  },
-  {
-    location: 'Torun • EXTRANET',
-    companyName: 'EXTRANET',
-    companyUrl: 'https://www.extranet.pl/',
-    duration: 'June 2018 - July 2018',
-    position: 'Frontend Developer - school practices'
-  }
-]
 </script>
 
 <template>
@@ -123,22 +123,19 @@ const jobs: Job[] = [
     <div ref="sectionRef" class="max-w-6xl mx-auto px-6 lg:px-10 pt-24 sm:pt-32">
       <div class="flex items-center gap-4 mb-6">
         <div class="w-8 h-px bg-white/15" />
-        <span class="text-white/25 text-[11px] uppercase tracking-[0.4em]">Doświadczenie</span>
+        <span class="text-white/25 text-[11px] uppercase tracking-[0.4em]">{{
+          t('experience.label')
+        }}</span>
       </div>
 
       <h2
         ref="headingRef"
         class="text-2xl sm:text-3xl lg:text-4xl font-normal text-gradient-subtle leading-snug mb-16"
       >
-        Moja ścieżka zawodowa.
+        {{ t('experience.heading') }}
       </h2>
 
       <div ref="listRef" class="relative">
-        <!-- Timeline connector line -->
-        <div
-          class="absolute left-0 sm:left-[11.5rem] top-0 bottom-0 w-px bg-gradient-to-b from-white/[0.06] via-white/[0.04] to-transparent hidden sm:block"
-        />
-
         <div class="flex flex-col">
           <ExperienceItem
             v-for="(job, index) in jobs"
