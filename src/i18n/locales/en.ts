@@ -36,7 +36,7 @@ export default {
         position: 'Mid Frontend Developer',
         description:
           'Building and maintaining scalable frontend solutions for one of the largest telecommunications companies in Poland.',
-        techStack: 'Vue 3, TypeScript, Tailwind CSS, REST API, Git'
+        techStack: 'Vue 3, TypeScript, REST API, Git'
       },
       {
         location: 'Austria • Graz / Remote',

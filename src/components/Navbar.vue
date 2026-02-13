@@ -72,14 +72,31 @@ onMounted(async () => {
   // Animate nav links only (navbar is already visible)
   const navLinks = document.querySelectorAll('.nav-link')
   if (navLinks.length > 0) {
-    gsap.from(navLinks, {
-      y: -15,
-      opacity: 0,
-      stagger: 0.08,
-      duration: 0.5,
-      ease: 'power2.out',
-      delay: 0.3
-    })
+    gsap.fromTo(
+      navLinks,
+      {
+        y: -15,
+        opacity: 0
+      },
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.08,
+        duration: 0.5,
+        ease: 'power2.out',
+        delay: 0.3
+      }
+    )
+  }
+
+  // Animate language switcher and CTA
+  const rightSide = document.querySelector('.navbar-right')
+  if (rightSide) {
+    gsap.fromTo(
+      rightSide,
+      { opacity: 0, x: 10 },
+      { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', delay: 0.5 }
+    )
   }
 
   window.addEventListener('scroll', onScroll)
@@ -133,7 +150,7 @@ onUnmounted(() => {
         </div>
 
         <!-- Right side - Language switcher & CTA -->
-        <div class="hidden md:flex items-center gap-6 ml-auto">
+        <div class="navbar-right hidden md:flex items-center gap-6 ml-auto">
           <!-- Language toggle -->
           <div class="flex items-center gap-2">
             <button

@@ -15,15 +15,19 @@ const projects = computed(() => [
     title: 'GoWedding.online',
     description: t('projects.items.0.description'),
     url: 'https://www.gowedding.online/',
-    logo: GoWeddingImage,
-    tags: ['Vue.js', 'TypeScript', 'Tailwind CSS']
+    image: GoWeddingImage,
+    tags: ['Vue.js', 'TypeScript', 'Tailwind CSS'],
+    year: '2024',
+    number: '01'
   },
   {
     title: 'WedShare',
     description: t('projects.items.1.description'),
     url: 'https://www.wedshare.app/',
-    logo: WedShareLogo,
-    tags: ['Vue.js', 'TypeScript', 'Tailwind CSS']
+    image: WedShareLogo,
+    tags: ['Vue.js', 'TypeScript', 'Tailwind CSS'],
+    year: '2024',
+    number: '02'
   }
 ])
 
@@ -45,24 +49,57 @@ onMounted(async () => {
     })
   }
 
-  if (sectionRef.value) {
-    const cards = document.querySelectorAll('.project-card')
-    if (cards.length > 0) {
-      gsap.from(cards, {
-        y: 80,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
-        stagger: 0.2,
+  // Animate each project card
+  const cards = document.querySelectorAll('.project-hero-card')
+  cards.forEach((card) => {
+    const img = card.querySelector('.project-image')
+    const content = card.querySelector('.project-content')
+
+    // Card entrance
+    gsap.from(card, {
+      opacity: 0,
+      y: 100,
+      duration: 1.2,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: card,
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      }
+    })
+
+    // Image parallax
+    if (img) {
+      gsap.to(img, {
+        yPercent: 15,
+        ease: 'none',
         scrollTrigger: {
-          trigger: sectionRef.value,
-          start: 'top 80%',
+          trigger: card,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1
+        }
+      })
+    }
+
+    // Content fade in
+    if (content) {
+      gsap.from(content.children, {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: content,
+          start: 'top 90%',
           toggleActions: 'play none none none'
         }
       })
     }
-    ScrollTrigger.refresh()
-  }
+  })
+
+  ScrollTrigger.refresh()
 })
 </script>
 
@@ -70,89 +107,129 @@ onMounted(async () => {
   <section id="projects" ref="sectionRef" class="py-24 sm:py-32 relative">
     <div class="section-divider" />
 
-    <div class="max-w-6xl mx-auto px-6 lg:px-10 pt-24 sm:pt-32">
-      <div class="flex items-center gap-4 mb-6">
-        <div class="w-8 h-px bg-white/15" />
-        <span class="text-white/25 text-[11px] uppercase tracking-[0.4em]">{{
-          t('projects.label')
-        }}</span>
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 pt-16 sm:pt-24">
+      <!-- Section Header -->
+      <div class="mb-20 sm:mb-32">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-8 h-px bg-white/15" />
+          <span class="text-white/25 text-[11px] uppercase tracking-[0.4em]">{{
+            t('projects.label')
+          }}</span>
+        </div>
+        <h2
+          ref="headingRef"
+          class="text-3xl sm:text-4xl lg:text-5xl font-normal text-gradient-subtle leading-snug max-w-3xl"
+        >
+          {{ t('projects.heading') }}
+        </h2>
       </div>
 
-      <h2
-        ref="headingRef"
-        class="text-2xl sm:text-3xl lg:text-4xl font-normal text-gradient-subtle leading-snug mb-16"
-      >
-        {{ t('projects.heading') }}
-      </h2>
-
-      <div class="grid sm:grid-cols-2 gap-5">
+      <!-- Projects Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
         <a
-          v-for="project in projects"
+          v-for="(project, index) in projects"
           :key="project.title"
           :href="project.url"
           target="_blank"
-          class="project-card group relative block"
+          rel="noopener noreferrer"
+          class="project-hero-card group block"
         >
-          <div
-            class="relative overflow-hidden border border-white/[0.06] bg-white/[0.015] hover:border-white/15 transition-all duration-700 h-full rounded-2xl"
-          >
-            <!-- Project visual area -->
+          <div class="relative">
+            <!-- Image Container -->
             <div
-              class="relative overflow-hidden bg-[#111111] aspect-[4/3] flex items-center justify-center rounded-t-2xl"
+              class="relative overflow-hidden rounded-3xl bg-[#0f0f0f] border border-white/[0.04] group-hover:border-white/10 transition-all duration-700"
             >
-              <img
-                v-if="project.logo"
-                :src="project.logo"
-                :alt="project.title"
-                class="relative z-10 w-full h-full object-cover opacity-60 group-hover:opacity-90 group-hover:scale-105 transition-all duration-1000 ease-out"
-              />
-              <span
-                v-else
-                class="relative z-10 text-4xl font-extralight text-white/15 group-hover:text-white/50 group-hover:scale-105 transition-all duration-1000 tracking-tight"
-              >
-                {{ project.title }}
-              </span>
-            </div>
+              <!-- Image with Parallax -->
+              <div class="relative aspect-[16/10] overflow-hidden">
+                <img
+                  :src="project.image"
+                  :alt="project.title"
+                  class="project-image w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-[1500ms] ease-out"
+                />
 
-            <!-- Content -->
-            <div class="p-6 lg:p-7">
-              <h3
-                class="text-base font-normal text-white/80 group-hover:text-white transition-colors duration-300 flex items-center gap-2.5 mb-3"
-              >
-                {{ project.title }}
-                <svg
-                  class="w-4 h-4 opacity-0 -translate-y-0.5 group-hover:opacity-50 group-hover:-translate-y-1 group-hover:translate-x-0.5 transition-all duration-500"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M7 17L17 7M17 7H7M17 7v10"
-                  />
-                </svg>
-              </h3>
-              <p class="text-white/25 text-[13px] leading-[1.7] font-light">
-                {{ project.description }}
-              </p>
+                <!-- Gradient Overlay -->
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-700"
+                />
 
-              <div class="flex flex-wrap gap-1.5 mt-5">
-                <span
-                  v-for="tag in project.tags"
-                  :key="tag"
-                  class="text-[10px] text-white/20 border border-white/[0.06] px-2.5 py-1 tracking-wider font-normal hover:text-white/40 hover:border-white/10 transition-all duration-300 rounded-full"
+                <!-- Hover Overlay -->
+                <div
+                  class="absolute inset-0 bg-white/0 group-hover:bg-white/[0.02] transition-colors duration-700"
+                />
+
+                <!-- Project Number - Top Left -->
+                <div class="absolute top-8 left-8 lg:top-12 lg:left-12">
+                  <span
+                    class="text-7xl sm:text-8xl lg:text-9xl font-light text-white/[0.03] group-hover:text-white/[0.08] transition-colors duration-700 leading-none"
+                  >
+                    {{ project.number }}
+                  </span>
+                </div>
+
+                <!-- View Project - Center on Hover -->
+                <div
+                  class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 >
-                  {{ tag }}
-                </span>
+                  <div
+                    class="flex items-center gap-3 text-white bg-white/10 backdrop-blur-xl border border-white/20 px-8 py-4 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500"
+                  >
+                    <span class="text-sm uppercase tracking-[0.2em] font-light">View Project</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <!-- Bottom gradient line on hover -->
-            <div
-              class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-            />
+            <!-- Content - Outside Image -->
+            <div class="project-content mt-6 lg:mt-8 flex flex-col gap-6">
+              <!-- Left: Title & Description -->
+              <div class="flex-1">
+                <div class="flex items-center gap-4 mb-3">
+                  <h3
+                    class="text-xl sm:text-2xl lg:text-3xl font-light text-white/90 group-hover:text-white transition-colors duration-300"
+                  >
+                    {{ project.title }}
+                  </h3>
+                  <svg
+                    class="w-5 h-5 text-white/30 group-hover:text-white/60 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M7 17L17 7M17 7H7M17 7v10"
+                    />
+                  </svg>
+                </div>
+                <p class="text-white/40 text-sm sm:text-base leading-relaxed font-light mb-4">
+                  {{ project.description }}
+                </p>
+
+                <!-- Tags & Year -->
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="text-white/20 text-xs font-mono">{{ project.year }}</span>
+                  <div class="flex flex-wrap gap-2">
+                    <span
+                      v-for="tag in project.tags"
+                      :key="tag"
+                      class="text-[11px] text-white/30 border border-white/[0.08] px-3 py-1.5 tracking-wide font-light hover:text-white/50 hover:border-white/15 transition-all duration-300 rounded-full"
+                    >
+                      {{ tag }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </a>
       </div>
