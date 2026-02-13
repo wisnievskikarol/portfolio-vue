@@ -9,6 +9,7 @@ const navbar = ref<HTMLElement | null>(null)
 const isMenuOpen = ref(false)
 const isScrolled = ref(false)
 const activeSection = ref('')
+const isNavbarReady = ref(true) // Always show navbar immediately
 
 const navigation = computed(() => [
   { name: t('nav.about'), href: '#about' },
@@ -68,23 +69,7 @@ const onScroll = () => {
 onMounted(async () => {
   await nextTick()
 
-  if (navbar.value) {
-    navbar.value.style.opacity = '1'
-    navbar.value.style.transform = 'translateY(0)'
-  }
-
-  await new Promise((resolve) => setTimeout(resolve, 50))
-
-  if (navbar.value) {
-    gsap.from(navbar.value, {
-      y: -80,
-      opacity: 0,
-      duration: 0.8,
-      ease: 'power3.out',
-      delay: 0.2
-    })
-  }
-
+  // Animate nav links only (navbar is already visible)
   const navLinks = document.querySelectorAll('.nav-link')
   if (navLinks.length > 0) {
     gsap.from(navLinks, {
@@ -93,7 +78,7 @@ onMounted(async () => {
       stagger: 0.08,
       duration: 0.5,
       ease: 'power2.out',
-      delay: 0.5
+      delay: 0.3
     })
   }
 
@@ -118,7 +103,8 @@ onUnmounted(() => {
     :style="{
       backgroundColor: isScrolled ? 'rgba(10, 10, 10, 0.92)' : 'rgba(10, 10, 10, 0.6)',
       backdropFilter: isScrolled ? 'blur(20px) saturate(1.2)' : 'blur(10px)',
-      borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.04)' : '1px solid transparent'
+      borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.04)' : '1px solid transparent',
+      opacity: '1'
     }"
   >
     <div class="max-w-6xl mx-auto px-6 lg:px-10">

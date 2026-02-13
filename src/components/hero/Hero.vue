@@ -114,7 +114,7 @@ onMounted(async () => {
           <div class="overflow-hidden">
             <span
               ref="firstName"
-              class="block text-white/30 text-xs uppercase tracking-[0.3em] font-mono"
+              class="block text-white/30 text-xs uppercase tracking-[0.3em] font-sans font-light"
               >Karol</span
             >
           </div>
@@ -122,7 +122,7 @@ onMounted(async () => {
           <div class="overflow-hidden">
             <span
               ref="lastName"
-              class="block text-white/30 text-xs uppercase tracking-[0.3em] font-mono"
+              class="block text-white/30 text-xs uppercase tracking-[0.3em] font-sans font-light"
               >Wiśniewski</span
             >
           </div>

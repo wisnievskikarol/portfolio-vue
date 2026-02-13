@@ -129,7 +129,7 @@ onMounted(async () => {
         <div class="flex flex-col">
           <div ref="photoRef" class="relative overflow-hidden rounded-3xl">
             <img
-              src="../../assets/my_photo.webp"
+              src="../../assets/my_photo_new.png"
               class="object-cover w-full aspect-[3/4] grayscale hover:grayscale-0 transition-all duration-700"
               alt="Karol Wiśniewski"
             />

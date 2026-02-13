@@ -2,7 +2,8 @@
 import { ref, onMounted, nextTick, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { gsap, ScrollTrigger } from '@/composables/useGsap'
-import GoWeddingLogo from '@/assets/gowedding_logo.svg'
+import GoWeddingImage from '@/assets/gowedding_image.png'
+import WedShareLogo from '@/assets/wedshare_logo.png'
 
 const { t } = useI18n()
 
@@ -14,14 +15,14 @@ const projects = computed(() => [
     title: 'GoWedding.online',
     description: t('projects.items.0.description'),
     url: 'https://www.gowedding.online/',
-    logo: GoWeddingLogo,
+    logo: GoWeddingImage,
     tags: ['Vue.js', 'TypeScript', 'Tailwind CSS']
   },
   {
     title: 'WedShare',
     description: t('projects.items.1.description'),
     url: 'https://www.wedshare.app/',
-    logo: null,
+    logo: WedShareLogo,
     tags: ['Vue.js', 'TypeScript', 'Tailwind CSS']
   }
 ])
@@ -103,7 +104,7 @@ onMounted(async () => {
                 v-if="project.logo"
                 :src="project.logo"
                 :alt="project.title"
-                class="relative z-10 w-40 opacity-40 group-hover:opacity-80 group-hover:scale-110 transition-all duration-1000 ease-out invert"
+                class="relative z-10 w-full h-full object-cover opacity-60 group-hover:opacity-90 group-hover:scale-105 transition-all duration-1000 ease-out"
               />
               <span
                 v-else
