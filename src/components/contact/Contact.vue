@@ -74,7 +74,7 @@ onMounted(async () => {
 
         <div class="contact-line mt-2">
           <a
-            href="mailto:wisniewskikarol@gmail.com"
+            href="mailto:wisnievskikarol@gmail.com"
             class="group inline-flex items-center gap-3 text-white/40 hover:text-white transition-all duration-500 text-lg sm:text-xl tracking-[0.05em]"
           >
             <span class="font-serif italic text-2xl sm:text-3xl lg:text-4xl">(</span>
@@ -96,10 +96,10 @@ onMounted(async () => {
 
         <div class="contact-line flex flex-col sm:flex-row sm:items-center gap-6 mt-4">
           <a
-            href="mailto:wisniewskikarol@gmail.com"
+            href="mailto:wisnievskikarol@gmail.com"
             class="text-white/25 hover:text-white/70 transition-colors duration-500 text-sm font-mono tracking-wide"
           >
-            wisniewskikarol@gmail.com
+            wisnievskikarol@gmail.com
           </a>
           <span class="hidden sm:block w-px h-4 bg-white/[0.06]" />
           <a

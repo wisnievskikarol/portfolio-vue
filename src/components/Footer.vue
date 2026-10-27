@@ -50,10 +50,10 @@ watch(locale, () => {
         <!-- Column 1: Email + Socials -->
         <div class="flex flex-col gap-3">
           <a
-            href="mailto:wisniewskikarol@gmail.com"
+            href="mailto:wisnievskikarol@gmail.com"
             class="text-white/25 hover:text-white/60 transition-colors duration-500"
           >
-            wisniewskikarol@gmail.com
+            wisnievskikarol@gmail.com
           </a>
           <div class="flex items-center gap-4 mt-1">
             <a
