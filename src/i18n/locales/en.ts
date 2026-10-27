@@ -3,13 +3,14 @@ export default {
     about: 'About',
     experience: 'Experience',
     technologies: 'Technologies',
+    ai: 'AI',
     projects: 'Projects',
     education: 'Education',
     contact: 'Contact',
     cta: 'Contact'
   },
   hero: {
-    role: 'Software Engineer',
+    role: 'Frontend & AI Engineer',
     description: 'Crafting web applications with attention to every pixel. Currently at',
     company: 'T-Mobile Polska',
     cta: 'View projects',
@@ -21,6 +22,7 @@ export default {
     p1: "Hi! I'm Karol — a frontend developer from Poland with a passion for building beautiful and performant web applications. My journey with technology started with computer graphics in childhood and evolved into a deep love for code during my studies.",
     p2: 'I currently work as a Mid Frontend Developer at T-Mobile Polska, where I create scalable frontend solutions for one of the largest telecommunications companies in Poland.',
     p3: 'I specialize in Vue.js, React and TypeScript. I prioritize clean code, pixel-perfect UI and best practices.',
+    p4: "Alongside frontend, I'm growing as an AI engineer: I completed AI_devs 4, where I learned to build AI agents — LLM tool use, function calling and agent workflows — together with the interfaces around them.",
     stat1: 'Years of experience',
     stat2: 'Completed projects',
     stat3: 'Companies'
@@ -83,6 +85,58 @@ export default {
     primaryLabel: 'Core stack',
     toolsLabel: 'Tools & other'
   },
+  ai: {
+    label: 'AI Engineering',
+    heading: 'Beyond the interface: AI agents.',
+    intro:
+      'Frontend is my main craft, AI agents are the second. I completed AI_devs 4 — a cohort course on building production-ready AI solutions — and I can design agents together with the interfaces people use them through.',
+    certificate: {
+      title: 'AI_devs 4: Builders',
+      kind: 'Certificate of course completion',
+      date: 'May 2026',
+      facts: '5 weeks · 25 lessons · 25+ hands-on projects',
+      numberLabel: 'No.',
+      open: 'View full certificate',
+      close: 'Close',
+      alt: 'AI_devs 4 course completion certificate issued to Karol Wiśniewski'
+    },
+    areas: [
+      {
+        title: 'LLMs in code',
+        points: [
+          'Function calling, native API tools and structured output (JSON Schema)',
+          'Designing tools for agents (CLI and MCP)',
+          'Multimodal input, prompt injection defence, cost and reliability'
+        ]
+      },
+      {
+        title: 'Context Engineering',
+        points: [
+          'Steering agents through context, not just prompts',
+          'Prompt caching, context compression and extraction',
+          'Context in multi-agent architectures'
+        ]
+      },
+      {
+        title: 'Observability & Evals',
+        points: [
+          'Offline and online evals for prompts and agents',
+          'Datasets sourced from production',
+          'Eval-driven integrations and agentic tools'
+        ]
+      },
+      {
+        title: 'Production apps',
+        points: [
+          'Multi-agent systems running in the background',
+          'Human-in-the-loop business processes',
+          'Tools beyond the chat, integrated with existing product logic'
+        ]
+      }
+    ],
+    outro: "I'm looking for my first projects with AI agents.",
+    cta: "Let's talk"
+  },
   projects: {
     label: 'Projects',
     heading: 'Selected works.',
@@ -111,7 +165,8 @@ export default {
   contact: {
     label: 'Contact',
     heading: "Let's talk\nabout your project.",
-    subtitle: "Looking for a software engineer? I'd love to discuss collaboration.",
+    subtitle:
+      'Looking for a frontend developer, or someone to build an AI agent with an interface around it? Write to me.',
     cta: 'Write to me'
   },
   footer: {
@@ -120,8 +175,8 @@ export default {
     credits: 'Designed & built by me'
   },
   meta: {
-    title: 'Karol Wiśniewski — Software Engineer',
+    title: 'Karol Wiśniewski — Frontend & AI Engineer',
     description:
-      'Mid Frontend Developer at T-Mobile Polska. Crafting innovative, user-centric web experiences with Vue.js, React and TypeScript.'
+      'Mid Frontend Developer at T-Mobile Polska building web apps with Vue.js, React and TypeScript. AI_devs 4 graduate building AI agents and the interfaces around them.'
   }
 }

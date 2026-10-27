@@ -132,10 +132,10 @@ onMounted(async () => {
         <div class="overflow-visible py-2">
           <h1
             ref="roleEl"
-            class="font-display font-medium text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-white leading-[1.05] tracking-[-0.04em]"
+            class="font-display font-medium text-[2.75rem] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-white leading-[1.05] tracking-[-0.04em]"
           >
-            SOFTWARE<br />
-            ENGINEER
+            FRONTEND &amp;<br />
+            AI ENGINEER
           </h1>
         </div>
 

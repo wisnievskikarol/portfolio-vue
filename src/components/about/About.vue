@@ -122,6 +122,9 @@ onMounted(async () => {
             <p class="text-white/60 leading-[1.8] text-[15px] font-light">
               {{ t('about.p3') }}
             </p>
+            <p class="text-white/60 leading-[1.8] text-[15px] font-light">
+              {{ t('about.p4') }}
+            </p>
           </div>
         </div>
 

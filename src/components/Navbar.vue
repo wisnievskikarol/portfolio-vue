@@ -15,6 +15,7 @@ const navigation = computed(() => [
   { name: t('nav.about'), href: '#about' },
   { name: t('nav.experience'), href: '#experience' },
   { name: t('nav.technologies'), href: '#technologies' },
+  { name: t('nav.ai'), href: '#ai' },
   { name: t('nav.projects'), href: '#projects' },
   { name: t('nav.education'), href: '#education' },
   { name: t('nav.contact'), href: '#contact' }

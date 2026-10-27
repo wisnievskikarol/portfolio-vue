@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import About from '@/components/about/About.vue'
+import AiEngineering from '@/components/ai/AiEngineering.vue'
 import Contact from '@/components/contact/Contact.vue'
 import Education from '@/components/education/Education.vue'
 import Experience from '@/components/experience/Experience.vue'
@@ -14,6 +15,7 @@ import Technologies from '@/components/technologies/Technologies.vue'
     <About />
     <Experience />
     <Technologies />
+    <AiEngineering />
     <Projects />
     <Education />
     <Contact />
