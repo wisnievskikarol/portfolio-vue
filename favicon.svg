@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <title>Karol Wiśniewski</title>
+  <rect width="256" height="256" rx="56" fill="#E2F54B"/>
+  <g transform="translate(25.6 25.6) scale(0.8)"><g fill="#0D0D0D">
+    <rect x="49" y="52" width="26" height="152"/>
+    <rect x="0" y="-13" width="152.42" height="26" transform="translate(62 128) rotate(-30)"/>
+    <rect x="0" y="-13" width="152.42" height="26" transform="translate(62 128) rotate(30)"/>
+    <rect x="33" y="23" width="58" height="58" rx="7"/>
+    <rect x="33" y="175" width="58" height="58" rx="7"/>
+    <rect x="165" y="23" width="58" height="58" rx="7"/>
+    <rect x="165" y="175" width="58" height="58" rx="7"/>
+    <rect x="37" y="103" width="50" height="50" rx="5.6"/>
+  </g></g>
+</svg>
