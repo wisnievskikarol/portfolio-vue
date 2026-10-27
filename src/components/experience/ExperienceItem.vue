@@ -17,7 +17,12 @@ defineProps<Job>()
 
     <div class="flex min-w-0 flex-col gap-2">
       <h3 class="text-card-title">
-        <a :href="companyUrl" target="_blank" rel="noopener" class="underline-offset-4 hover:underline">
+        <a
+          :href="companyUrl"
+          target="_blank"
+          rel="noopener"
+          class="underline-offset-4 hover:underline"
+        >
           {{ companyName }}
         </a>
       </h3>

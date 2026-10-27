@@ -36,7 +36,10 @@ useReveal(sectionRef)
         <h3 class="text-card-title">{{ area.title }}</h3>
         <ul class="flex flex-col gap-2">
           <li v-for="point in area.points" :key="point" class="flex gap-3 text-body text-ink-muted">
-            <span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-ink-muted" aria-hidden="true" />
+            <span
+              class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-ink-muted"
+              aria-hidden="true"
+            />
             {{ point }}
           </li>
         </ul>

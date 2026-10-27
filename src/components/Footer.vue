@@ -46,7 +46,9 @@ watch(locale, () => {
       class="flex flex-col gap-6 text-caption text-ink-muted sm:flex-row sm:items-center sm:justify-between"
     >
       <div class="flex flex-wrap items-center gap-x-5 gap-y-2">
-        <a href="mailto:wisnievskikarol@gmail.com" class="hover:text-ink">wisnievskikarol@gmail.com</a>
+        <a href="mailto:wisnievskikarol@gmail.com" class="hover:text-ink"
+          >wisnievskikarol@gmail.com</a
+        >
         <a
           href="https://www.linkedin.com/in/karol-wi%C5%9Bniewski-1a9747200/"
           target="_blank"
@@ -54,7 +56,9 @@ watch(locale, () => {
           class="hover:text-ink"
           >LinkedIn</a
         >
-        <a href="https://github.com/" target="_blank" rel="noopener" class="hover:text-ink">GitHub</a>
+        <a href="https://github.com/" target="_blank" rel="noopener" class="hover:text-ink"
+          >GitHub</a
+        >
       </div>
 
       <span class="tabular-nums">{{ t('footer.city') }} {{ currentTime }}</span>

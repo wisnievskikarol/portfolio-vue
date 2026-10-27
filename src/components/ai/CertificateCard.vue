@@ -21,7 +21,10 @@ const onBackdropClick = (event: MouseEvent) => {
 </script>
 
 <template>
-  <div class="grid items-center gap-8 md:grid-cols-[minmax(0,46%)_minmax(0,1fr)] md:gap-12" data-reveal>
+  <div
+    class="grid items-center gap-8 md:grid-cols-[minmax(0,46%)_minmax(0,1fr)] md:gap-12"
+    data-reveal
+  >
     <button
       type="button"
       class="group relative overflow-hidden rounded-card bg-hairline"

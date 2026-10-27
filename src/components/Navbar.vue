@@ -17,7 +17,15 @@ const navigation = computed(() => [
 ])
 
 // Every section on the page, so the pill of the nearest preceding nav item stays lit
-const sectionOrder = ['about', 'experience', 'technologies', 'ai', 'projects', 'education', 'contact']
+const sectionOrder = [
+  'about',
+  'experience',
+  'technologies',
+  'ai',
+  'projects',
+  'education',
+  'contact'
+]
 const navOwner: Record<string, string> = {
   technologies: 'experience',
   ai: 'experience',
@@ -59,7 +67,7 @@ onUnmounted(() => {
     ref="headerRef"
     class="flex flex-col items-center gap-8 bg-gradient-to-b from-surface-glow to-surface px-4 pb-12 pt-8"
   >
-    <a href="#" class="h-12 sm:h-14" :aria-label="t('meta.title')">
+    <a href="#" class="h-12 sm:h-14" :aria-label="t('meta.title')" data-intro="logo">
       <SiteLogo />
     </a>
     <nav class="flex flex-wrap justify-center gap-3 sm:gap-4" :aria-label="t('nav.label')">
@@ -68,6 +76,7 @@ onUnmounted(() => {
         :key="item.id"
         :href="`#${item.id}`"
         class="ms-pill"
+        data-intro="pill"
         :aria-current="activeSection === item.id ? 'true' : undefined"
       >
         {{ item.name }}
@@ -75,6 +84,7 @@ onUnmounted(() => {
       <button
         type="button"
         class="ms-pill min-w-0 uppercase"
+        data-intro="pill"
         :aria-label="t('nav.switchLanguage')"
         @click="toggleLanguage"
       >
