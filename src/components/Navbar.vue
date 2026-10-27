@@ -1,279 +1,129 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, nextTick, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { gsap } from '@/composables/useGsap'
+import SiteLogo from './common/SiteLogo.vue'
 
 const { t, locale } = useI18n()
 
-const navbar = ref<HTMLElement | null>(null)
-const isMenuOpen = ref(false)
-const isScrolled = ref(false)
+const headerRef = ref<HTMLElement | null>(null)
+const isCompact = ref(false)
 const activeSection = ref('')
-const isNavbarReady = ref(true) // Always show navbar immediately
 
 const navigation = computed(() => [
-  { name: t('nav.about'), href: '#about' },
-  { name: t('nav.experience'), href: '#experience' },
-  { name: t('nav.technologies'), href: '#technologies' },
-  { name: t('nav.ai'), href: '#ai' },
-  { name: t('nav.projects'), href: '#projects' },
-  { name: t('nav.education'), href: '#education' },
-  { name: t('nav.contact'), href: '#contact' }
+  { name: t('nav.about'), id: 'about' },
+  { name: t('nav.experience'), id: 'experience' },
+  { name: t('nav.projects'), id: 'projects' },
+  { name: t('nav.contact'), id: 'contact' }
 ])
 
-const switchLanguage = (lang: string) => {
-  locale.value = lang
-  localStorage.setItem('locale', lang)
+// Every section on the page, so the pill of the nearest preceding nav item stays lit
+const sectionOrder = ['about', 'experience', 'technologies', 'ai', 'projects', 'education', 'contact']
+const navOwner: Record<string, string> = {
+  technologies: 'experience',
+  ai: 'experience',
+  education: 'projects'
 }
 
-const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value
+const otherLocale = computed(() => (locale.value === 'pl' ? 'en' : 'pl'))
 
-  // Lock/unlock body scroll
-  if (isMenuOpen.value) {
-    document.body.style.overflow = 'hidden'
-    nextTick(() => {
-      gsap.fromTo(
-        '.mobile-nav-link',
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, stagger: 0.08, duration: 0.5, ease: 'power3.out', delay: 0.15 }
-      )
-    })
-  } else {
-    document.body.style.overflow = ''
-  }
-}
-
-const closeMenu = () => {
-  isMenuOpen.value = false
-  document.body.style.overflow = ''
+const toggleLanguage = () => {
+  locale.value = otherLocale.value
+  localStorage.setItem('locale', locale.value)
 }
 
 const onScroll = () => {
-  isScrolled.value = window.scrollY > 50
+  const headerBottom = headerRef.value?.getBoundingClientRect().bottom ?? 0
+  isCompact.value = headerBottom < 0
 
-  // Track active section
-  const sections = navigation.value.map((n) => n.href.replace('#', ''))
   let current = ''
-  for (const id of sections) {
+  for (const id of sectionOrder) {
     const el = document.getElementById(id)
-    if (el) {
-      const rect = el.getBoundingClientRect()
-      if (rect.top <= 150) {
-        current = id
-      }
-    }
+    if (el && el.getBoundingClientRect().top <= 120) current = id
   }
-  activeSection.value = current
+  activeSection.value = navOwner[current] ?? current
 }
 
-onMounted(async () => {
-  await nextTick()
-
-  // Animate nav links only (navbar is already visible)
-  const navLinks = document.querySelectorAll('.nav-link')
-  if (navLinks.length > 0) {
-    gsap.fromTo(
-      navLinks,
-      {
-        y: -15,
-        opacity: 0
-      },
-      {
-        y: 0,
-        opacity: 1,
-        stagger: 0.08,
-        duration: 0.5,
-        ease: 'power2.out',
-        delay: 0.3
-      }
-    )
-  }
-
-  // Animate language switcher and CTA
-  const rightSide = document.querySelector('.navbar-right')
-  if (rightSide) {
-    gsap.fromTo(
-      rightSide,
-      { opacity: 0, x: 10 },
-      { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', delay: 0.5 }
-    )
-  }
-
-  window.addEventListener('scroll', onScroll)
+onMounted(() => {
+  window.addEventListener('scroll', onScroll, { passive: true })
   onScroll()
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
-  // Restore body overflow when component unmounts
-  document.body.style.overflow = ''
 })
 </script>
 
 <template>
-  <nav
-    ref="navbar"
-    :class="[
-      'fixed top-0 left-0 right-0 isolate transition-all duration-700',
-      isMenuOpen ? 'z-[1001]' : 'z-[100]'
-    ]"
-    :style="{
-      backgroundColor: isScrolled ? 'rgba(10, 10, 10, 0.92)' : 'rgba(10, 10, 10, 0.6)',
-      backdropFilter: isScrolled ? 'blur(20px) saturate(1.2)' : 'blur(10px)',
-      borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.04)' : '1px solid transparent',
-      opacity: '1'
-    }"
+  <!-- Full header: centered logo above the pills, on the glow gradient -->
+  <header
+    ref="headerRef"
+    class="flex flex-col items-center gap-8 bg-gradient-to-b from-surface-glow to-surface px-4 pb-12 pt-8"
   >
-    <div class="max-w-6xl mx-auto px-6 lg:px-10">
-      <div class="flex items-center justify-between h-20">
-        <!-- Left: nav links -->
-        <div class="hidden md:flex items-center gap-7">
+    <a href="#" class="h-12 sm:h-14" :aria-label="t('meta.title')">
+      <SiteLogo />
+    </a>
+    <nav class="flex flex-wrap justify-center gap-3 sm:gap-4" :aria-label="t('nav.label')">
+      <a
+        v-for="item in navigation"
+        :key="item.id"
+        :href="`#${item.id}`"
+        class="ms-pill"
+        :aria-current="activeSection === item.id ? 'true' : undefined"
+      >
+        {{ item.name }}
+      </a>
+      <button
+        type="button"
+        class="ms-pill min-w-0 uppercase"
+        :aria-label="t('nav.switchLanguage')"
+        @click="toggleLanguage"
+      >
+        {{ otherLocale }}
+      </button>
+    </nav>
+  </header>
+
+  <!-- Compact bar: appears once the full header has scrolled away -->
+  <Transition
+    enter-active-class="transition duration-150 ease-out motion-reduce:transition-none"
+    enter-from-class="-translate-y-full"
+    leave-active-class="transition duration-150 ease-out motion-reduce:transition-none"
+    leave-to-class="-translate-y-full"
+  >
+    <div
+      v-if="isCompact"
+      class="fixed inset-x-0 top-0 z-50 bg-surface shadow-[0_1px_0_var(--hairline)]"
+    >
+      <div class="page-x flex h-16 items-center gap-4">
+        <a href="#" class="h-7 shrink-0" :aria-label="t('nav.backToTop')">
+          <SiteLogo variant="mark" />
+        </a>
+        <nav
+          class="ml-auto flex items-center gap-2 overflow-x-auto sm:gap-3"
+          :aria-label="t('nav.label')"
+        >
           <a
             v-for="item in navigation"
-            :key="item.name"
-            :href="item.href"
+            :key="item.id"
+            :href="`#${item.id}`"
             :class="[
-              'nav-link relative text-[11px] uppercase tracking-[0.15em] transition-all duration-500 py-1',
-              activeSection === item.href.replace('#', '')
-                ? 'text-white/90'
-                : 'text-white/30 hover:text-white/70'
+              'ms-pill h-9 min-w-0 shrink-0 px-4',
+              item.id === 'contact' ? '' : 'max-sm:hidden'
             ]"
+            :aria-current="activeSection === item.id ? 'true' : undefined"
           >
             {{ item.name }}
-            <span
-              :class="[
-                'absolute -bottom-1 left-0 h-px bg-white/50 transition-all duration-500',
-                activeSection === item.href.replace('#', '') ? 'w-full' : 'w-0'
-              ]"
-            />
           </a>
-        </div>
-
-        <!-- Right side - Language switcher & CTA -->
-        <div class="navbar-right hidden md:flex items-center gap-6 ml-auto">
-          <!-- Language toggle -->
-          <div class="flex items-center gap-2">
-            <button
-              @click="switchLanguage('pl')"
-              :class="[
-                'text-[11px] uppercase tracking-[0.15em] transition-all duration-300',
-                locale === 'pl' ? 'text-white/80' : 'text-white/25 hover:text-white/50'
-              ]"
-            >
-              PL
-            </button>
-            <span class="text-white/10">/</span>
-            <button
-              @click="switchLanguage('en')"
-              :class="[
-                'text-[11px] uppercase tracking-[0.15em] transition-all duration-300',
-                locale === 'en' ? 'text-white/80' : 'text-white/25 hover:text-white/50'
-              ]"
-            >
-              EN
-            </button>
-          </div>
-
-          <!-- CTA -->
-          <a
-            href="#contact"
-            class="group relative text-[11px] text-white/80 border border-white/15 px-6 py-2.5 uppercase tracking-[0.2em] overflow-hidden transition-all duration-500 hover:border-white/30 rounded-full"
+          <button
+            type="button"
+            class="ms-pill h-9 min-w-0 shrink-0 px-4 uppercase"
+            :aria-label="t('nav.switchLanguage')"
+            @click="toggleLanguage"
           >
-            <span class="relative z-10 group-hover:text-[#0a0a0a] transition-colors duration-500">{{
-              t('nav.cta')
-            }}</span>
-            <div
-              class="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
-            />
-          </a>
-        </div>
-
-        <!-- Mobile hamburger -->
-        <button
-          class="md:hidden relative w-10 h-10 flex items-center justify-center"
-          @click="toggleMenu"
-        >
-          <div class="relative w-6 h-6 flex items-center justify-center">
-            <span
-              :class="[
-                'absolute w-6 h-px bg-white/80 transition-all duration-300',
-                isMenuOpen ? 'rotate-45' : '-translate-y-2'
-              ]"
-            />
-            <span
-              :class="[
-                'absolute w-6 h-px bg-white/80 transition-all duration-300',
-                isMenuOpen ? 'opacity-0 scale-0' : ''
-              ]"
-            />
-            <span
-              :class="[
-                'absolute w-6 h-px bg-white/80 transition-all duration-300',
-                isMenuOpen ? '-rotate-45' : 'translate-y-2'
-              ]"
-            />
-          </div>
-        </button>
+            {{ otherLocale }}
+          </button>
+        </nav>
       </div>
     </div>
-
-    <!-- Mobile menu - OUTSIDE nav, rendered at top level -->
-    <Teleport to="body">
-      <Transition
-        enter-active-class="transition-all duration-500 ease-out"
-        enter-from-class="opacity-0 -translate-y-4"
-        enter-to-class="opacity-100 translate-y-0"
-        leave-active-class="transition-all duration-300 ease-in"
-        leave-from-class="opacity-100 translate-y-0"
-        leave-to-class="opacity-0 -translate-y-4"
-      >
-        <div
-          v-if="isMenuOpen"
-          class="md:hidden fixed inset-0 top-20 bg-[#0a0a0a]/98 backdrop-blur-2xl z-[999]"
-          style="isolation: isolate"
-        >
-          <div class="flex flex-col items-center justify-center h-full gap-8 -mt-20">
-            <a
-              v-for="item in navigation"
-              :key="item.name"
-              :href="item.href"
-              :class="[
-                'mobile-nav-link text-2xl font-extralight uppercase tracking-[0.2em] transition-colors duration-300',
-                activeSection === item.href.replace('#', '')
-                  ? 'text-white'
-                  : 'text-white/40 hover:text-white/70'
-              ]"
-              @click="closeMenu"
-            >
-              {{ item.name }}
-            </a>
-
-            <!-- Language toggle mobile -->
-            <div class="flex items-center gap-3 mt-4">
-              <button
-                @click="switchLanguage('pl')"
-                :class="[
-                  'text-sm uppercase tracking-[0.2em] transition-all duration-300',
-                  locale === 'pl' ? 'text-white/80' : 'text-white/30 hover:text-white/60'
-                ]"
-              >
-                PL
-              </button>
-              <span class="text-white/15">/</span>
-              <button
-                @click="switchLanguage('en')"
-                :class="[
-                  'text-sm uppercase tracking-[0.2em] transition-all duration-300',
-                  locale === 'en' ? 'text-white/80' : 'text-white/30 hover:text-white/60'
-                ]"
-              >
-                EN
-              </button>
-            </div>
-          </div>
-        </div>
-      </Transition>
-    </Teleport>
-  </nav>
+  </Transition>
 </template>

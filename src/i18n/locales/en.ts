@@ -7,14 +7,15 @@ export default {
     projects: 'Projects',
     education: 'Education',
     contact: 'Contact',
-    cta: 'Contact'
+    label: 'Main navigation',
+    switchLanguage: 'Switch language to Polish',
+    backToTop: 'Back to top'
   },
   hero: {
     role: 'Frontend & AI Engineer',
-    description: 'Crafting web applications with attention to every pixel. Currently at',
-    company: 'T-Mobile Polska',
-    cta: 'View projects',
-    year: '© 2026'
+    statement:
+      'I build web interfaces with care for every pixel. By day, Vue 3 and TypeScript at T‑Mobile Polska; after hours, AI agents and the interfaces around them.',
+    cta: 'Write to me'
   },
   about: {
     label: 'About',

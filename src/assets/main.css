@@ -2,108 +2,105 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Maślany design system tokens (https://claude.ai/artifact/TSZXuxA99c2rB3pGAsntFv) */
 @layer base {
+  :root {
+    --surface-100: #fff8de;
+    --surface-glow: #ffee8c;
+    --butter: #ffec85;
+    --on-butter: #1e0907;
+    --yolk: #ffe94a;
+    --ink: #1e0907;
+    --ink-muted: #5e4b3c;
+    --primary: #1e0907;
+    --on-primary: #fff8de;
+    --hairline: #e9ddb0;
+    --focus: #1e0907;
+    --scrim: rgba(30, 9, 7, 0.32);
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --surface-100: #1a0f0b;
+      --surface-glow: #2b1d0e;
+      --butter: #ffe57a;
+      --ink: #fff3cf;
+      --ink-muted: #c9b89a;
+      --primary: #fff3cf;
+      --on-primary: #1e0907;
+      --hairline: #3a2a1e;
+      --focus: #ffe94a;
+      --scrim: rgba(0, 0, 0, 0.4);
+      color-scheme: dark;
+    }
+  }
+
   html {
-    scroll-behavior: smooth;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+    scroll-padding-top: 5rem;
   }
 
   body {
-    background-color: #0a0a0a;
+    @apply bg-surface text-ink font-sans antialiased;
     overflow-x: hidden;
-    color: #e5e5e5;
-  }
-
-  ::-webkit-scrollbar {
-    width: 3px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 999px;
   }
 
   ::selection {
-    background-color: rgba(255, 255, 255, 0.15);
-    color: white;
+    background-color: var(--yolk);
+    color: var(--on-butter);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
   }
 }
 
 @layer components {
-  .section-divider {
-    @apply w-full h-px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.03) 15%,
-      rgba(255, 255, 255, 0.08) 50%,
-      rgba(255, 255, 255, 0.03) 85%,
-      transparent 100%
-    );
+  /* Left-aligned page column: 16px gutter on phones, page-gutter (128px) on desktop */
+  .page-x {
+    @apply mx-auto w-full max-w-[1440px] px-4 sm:px-10 lg:px-32;
   }
 
-  /* Gradient text utility */
-  .text-gradient {
-    background: linear-gradient(
-      135deg,
-      #ffffff 0%,
-      rgba(255, 255, 255, 0.7) 50%,
-      rgba(255, 255, 255, 0.5) 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .eyebrow {
+    @apply text-eyebrow text-ink;
   }
 
-  .text-gradient-subtle {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.95) 0%,
-      rgba(255, 255, 255, 0.6) 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .ms-pill {
+    @apply inline-flex h-10 min-w-[104px] items-center justify-center rounded-pill bg-butter px-6 text-label text-on-butter;
+    transition: background-color 160ms ease-out;
+  }
+  .ms-pill:hover,
+  .ms-pill[aria-current='true'] {
+    @apply bg-yolk;
   }
 
-  /* 3D text depth effect */
-  .text-3d-light {
-    text-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.08),
-      0 2px 0 rgba(255, 255, 255, 0.06),
-      0 3px 0 rgba(255, 255, 255, 0.04),
-      0 4px 0 rgba(255, 255, 255, 0.02),
-      0 5px 0 rgba(255, 255, 255, 0.01),
-      0 8px 12px rgba(0, 0, 0, 0.3);
+  .ms-btn {
+    @apply inline-flex h-[52px] items-center justify-center rounded-pill bg-primary px-6 text-label text-on-primary;
+    transition: transform 160ms ease-out;
+  }
+  .ms-btn:hover {
+    transform: translateY(-2px);
+  }
+  .ms-btn--soft {
+    @apply bg-butter text-on-butter;
   }
 
-  .text-3d-bold {
-    text-shadow:
-      0 1px 0 rgba(139, 92, 246, 0.12),
-      0 2px 0 rgba(139, 92, 246, 0.1),
-      0 3px 0 rgba(139, 92, 246, 0.08),
-      0 4px 0 rgba(139, 92, 246, 0.06),
-      0 5px 0 rgba(139, 92, 246, 0.04),
-      0 6px 0 rgba(139, 92, 246, 0.02),
-      0 10px 20px rgba(0, 0, 0, 0.4),
-      0 15px 40px rgba(139, 92, 246, 0.15);
+  /* Non-interactive label pill: butter for primary items, outlined for secondary */
+  .ms-tag {
+    @apply inline-flex h-8 items-center rounded-pill bg-butter px-4 text-caption text-on-butter;
+  }
+  .ms-tag--quiet {
+    @apply bg-transparent text-ink-muted ring-1 ring-inset ring-hairline;
   }
 
-  /* Outline / stroke text */
-  .text-outline {
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.4);
-  }
-
-  @media (min-width: 768px) {
-    .text-outline {
-      -webkit-text-stroke-width: 2px;
-      -webkit-text-stroke-color: rgba(255, 255, 255, 0.45);
+  @media (prefers-reduced-motion: reduce) {
+    .ms-pill,
+    .ms-btn {
+      transition: none;
+    }
+    .ms-btn:hover {
+      transform: none;
     }
   }
 }

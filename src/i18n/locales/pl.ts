@@ -7,14 +7,15 @@ export default {
     projects: 'Projekty',
     education: 'Edukacja',
     contact: 'Kontakt',
-    cta: 'Kontakt'
+    label: 'Główna nawigacja',
+    switchLanguage: 'Zmień język na angielski',
+    backToTop: 'Do góry'
   },
   hero: {
     role: 'Frontend & AI Engineer',
-    description: 'Tworzę aplikacje webowe z dbałością o każdy piksel. Aktualnie w',
-    company: 'T-Mobile Polska',
-    cta: 'Zobacz projekty',
-    year: '© 2026'
+    statement:
+      'Tworzę interfejsy webowe z dbałością o każdy piksel. Na co dzień Vue 3 i TypeScript w T‑Mobile Polska, po godzinach agenci AI i interfejsy wokół nich.',
+    cta: 'Napisz do mnie'
   },
   about: {
     label: 'O mnie',

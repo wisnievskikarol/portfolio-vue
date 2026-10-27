@@ -21,12 +21,10 @@ const onBackdropClick = (event: MouseEvent) => {
 </script>
 
 <template>
-  <div
-    class="ai-reveal flex flex-col md:flex-row gap-8 md:gap-10 border border-white/[0.06] rounded-3xl p-5 sm:p-6 bg-white/[0.015]"
-  >
+  <div class="grid items-center gap-8 md:grid-cols-[minmax(0,46%)_minmax(0,1fr)] md:gap-12" data-reveal>
     <button
       type="button"
-      class="group relative md:w-[46%] flex-shrink-0 overflow-hidden rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/60"
+      class="group relative overflow-hidden rounded-card bg-hairline"
       :aria-label="t('ai.certificate.open')"
       @click="open"
     >
@@ -36,27 +34,19 @@ const onBackdropClick = (event: MouseEvent) => {
         width="800"
         height="566"
         loading="lazy"
-        class="w-full h-auto transition-transform duration-700 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+        class="h-auto w-full"
       />
-      <span
-        class="absolute bottom-3 right-3 text-[10px] uppercase tracking-[0.2em] text-white/80 bg-[#0a0a0a]/80 backdrop-blur-sm px-3 py-1.5 rounded-full"
-      >
+      <span class="ms-pill absolute bottom-4 right-4 h-9 min-w-0 px-4 text-caption">
         {{ t('ai.certificate.open') }}
       </span>
     </button>
 
-    <div class="flex flex-col justify-center gap-3">
-      <span class="text-white/55 text-[11px] uppercase tracking-[0.3em]">
-        {{ t('ai.certificate.kind') }}
-      </span>
-      <h3 class="text-white/90 text-2xl sm:text-3xl font-normal">
-        {{ t('ai.certificate.title') }}
-      </h3>
-      <time :datetime="ISSUE_DATE" class="text-white/60 text-sm font-light">
-        {{ t('ai.certificate.date') }}
-      </time>
-      <p class="text-white/60 text-sm font-light">{{ t('ai.certificate.facts') }}</p>
-      <p class="text-white/50 text-[11px] font-mono break-all mt-2">
+    <div class="flex min-w-0 flex-col items-start gap-2">
+      <p class="eyebrow">{{ t('ai.certificate.kind') }}</p>
+      <h3 class="text-statement-sm">{{ t('ai.certificate.title') }}</h3>
+      <time :datetime="ISSUE_DATE" class="text-body">{{ t('ai.certificate.date') }}</time>
+      <p class="text-body text-ink-muted">{{ t('ai.certificate.facts') }}</p>
+      <p class="mt-2 break-all text-caption text-ink-muted">
         {{ t('ai.certificate.numberLabel') }} {{ CERTIFICATE_NUMBER }}
       </p>
     </div>
@@ -76,11 +66,11 @@ const onBackdropClick = (event: MouseEvent) => {
           width="2000"
           height="1414"
           loading="lazy"
-          class="block w-auto max-w-full h-auto max-h-[88vh] rounded-xl"
+          class="block h-auto max-h-[88vh] w-auto max-w-full rounded-card"
         />
         <button
           type="button"
-          class="absolute top-3 right-3 text-[11px] uppercase tracking-[0.2em] text-white/90 bg-[#0a0a0a]/85 backdrop-blur-sm px-4 py-2 rounded-full hover:bg-[#0a0a0a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/70"
+          class="ms-pill absolute right-4 top-4 h-9 min-w-0 px-4"
           autofocus
           @click="close"
         >
@@ -93,7 +83,6 @@ const onBackdropClick = (event: MouseEvent) => {
 
 <style scoped>
 .certificate-dialog::backdrop {
-  background: rgba(10, 10, 10, 0.88);
-  backdrop-filter: blur(6px);
+  background: rgba(30, 9, 7, 0.8);
 }
 </style>
