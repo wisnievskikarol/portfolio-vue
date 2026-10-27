@@ -12,6 +12,7 @@ export default {
         butter: 'var(--butter)',
         'on-butter': 'var(--on-butter)',
         yolk: 'var(--yolk)',
+        'on-yolk': 'var(--on-yolk)',
         ink: {
           DEFAULT: 'var(--ink)',
           muted: 'var(--ink-muted)'

@@ -5,8 +5,7 @@ import SiteLogo from './common/SiteLogo.vue'
 
 const { t, locale } = useI18n()
 
-const headerRef = ref<HTMLElement | null>(null)
-const isCompact = ref(false)
+const isScrolled = ref(false)
 const activeSection = ref('')
 
 const navigation = computed(() => [
@@ -16,7 +15,7 @@ const navigation = computed(() => [
   { name: t('nav.contact'), id: 'contact' }
 ])
 
-// Every section on the page, so the pill of the nearest preceding nav item stays lit
+// Every section on the page, so the link of the nearest preceding nav item stays lit
 const sectionOrder = [
   'about',
   'experience',
@@ -40,8 +39,7 @@ const toggleLanguage = () => {
 }
 
 const onScroll = () => {
-  const headerBottom = headerRef.value?.getBoundingClientRect().bottom ?? 0
-  isCompact.value = headerBottom < 0
+  isScrolled.value = window.scrollY > 8
 
   let current = ''
   for (const id of sectionOrder) {
@@ -62,78 +60,53 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <!-- Full header: centered logo above the pills, on the glow gradient -->
+  <!-- One bar: logo left, section links centered, language + email actions right -->
   <header
-    ref="headerRef"
-    class="flex flex-col items-center gap-8 bg-gradient-to-b from-surface-glow to-surface px-4 pb-12 pt-8"
-  >
-    <a href="#" class="h-12 sm:h-14" :aria-label="t('meta.title')" data-intro="logo">
-      <SiteLogo />
-    </a>
-    <nav class="flex flex-wrap justify-center gap-3 sm:gap-4" :aria-label="t('nav.label')">
-      <a
-        v-for="item in navigation"
-        :key="item.id"
-        :href="`#${item.id}`"
-        class="ms-pill"
-        data-intro="pill"
-        :aria-current="activeSection === item.id ? 'true' : undefined"
-      >
-        {{ item.name }}
-      </a>
-      <button
-        type="button"
-        class="ms-pill min-w-0 uppercase"
-        data-intro="pill"
-        :aria-label="t('nav.switchLanguage')"
-        @click="toggleLanguage"
-      >
-        {{ otherLocale }}
-      </button>
-    </nav>
-  </header>
-
-  <!-- Compact bar: appears once the full header has scrolled away -->
-  <Transition
-    enter-active-class="transition duration-150 ease-out motion-reduce:transition-none"
-    enter-from-class="-translate-y-full"
-    leave-active-class="transition duration-150 ease-out motion-reduce:transition-none"
-    leave-to-class="-translate-y-full"
+    :class="[
+      'sticky top-0 z-50 transition-colors duration-150 motion-reduce:transition-none',
+      isScrolled ? 'bg-surface shadow-[0_1px_0_var(--hairline)]' : 'bg-transparent'
+    ]"
   >
     <div
-      v-if="isCompact"
-      class="fixed inset-x-0 top-0 z-50 bg-surface shadow-[0_1px_0_var(--hairline)]"
+      class="page-x grid h-20 grid-cols-[1fr_auto] items-center gap-4 md:grid-cols-[1fr_auto_1fr]"
     >
-      <div class="page-x flex h-16 items-center gap-4">
-        <a href="#" class="h-7 shrink-0" :aria-label="t('nav.backToTop')">
-          <SiteLogo variant="mark" />
-        </a>
-        <nav
-          class="ml-auto flex items-center gap-2 overflow-x-auto sm:gap-3"
-          :aria-label="t('nav.label')"
+      <a href="#" class="h-8 justify-self-start" :aria-label="t('meta.title')" data-intro="logo">
+        <SiteLogo class="max-sm:hidden" />
+        <SiteLogo variant="mark" class="sm:hidden" />
+      </a>
+
+      <nav class="hidden items-center gap-1 md:flex" :aria-label="t('nav.label')">
+        <a
+          v-for="item in navigation"
+          :key="item.id"
+          :href="`#${item.id}`"
+          :class="[
+            'rounded-pill px-4 py-2 text-label transition-colors duration-150 motion-reduce:transition-none',
+            activeSection === item.id
+              ? 'bg-butter text-on-butter'
+              : 'hover:bg-butter hover:text-on-butter'
+          ]"
+          :aria-current="activeSection === item.id ? 'true' : undefined"
+          data-intro="pill"
         >
-          <a
-            v-for="item in navigation"
-            :key="item.id"
-            :href="`#${item.id}`"
-            :class="[
-              'ms-pill h-9 min-w-0 shrink-0 px-4',
-              item.id === 'contact' ? '' : 'max-sm:hidden'
-            ]"
-            :aria-current="activeSection === item.id ? 'true' : undefined"
-          >
-            {{ item.name }}
-          </a>
-          <button
-            type="button"
-            class="ms-pill h-9 min-w-0 shrink-0 px-4 uppercase"
-            :aria-label="t('nav.switchLanguage')"
-            @click="toggleLanguage"
-          >
-            {{ otherLocale }}
-          </button>
-        </nav>
+          {{ item.name }}
+        </a>
+      </nav>
+
+      <div class="flex items-center gap-2 justify-self-end">
+        <button
+          type="button"
+          class="ms-btn ms-btn--soft h-11 px-5 uppercase"
+          :aria-label="t('nav.switchLanguage')"
+          data-intro="pill"
+          @click="toggleLanguage"
+        >
+          {{ otherLocale }}
+        </button>
+        <a href="mailto:wisnievskikarol@gmail.com" class="ms-btn h-11 px-5" data-intro="pill">
+          {{ t('hero.cta') }}
+        </a>
       </div>
     </div>
-  </Transition>
+  </header>
 </template>

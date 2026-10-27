@@ -12,7 +12,9 @@ defineProps<Job>()
     <div class="flex flex-col items-start gap-1 text-caption text-ink-muted">
       <span>{{ duration }}</span>
       <span>{{ location }}</span>
-      <span v-if="current" class="ms-tag mt-2 h-7 bg-yolk">{{ t('experience.current') }}</span>
+      <span v-if="current" class="ms-tag mt-2 h-7 bg-yolk text-on-yolk">{{
+        t('experience.current')
+      }}</span>
     </div>
 
     <div class="flex min-w-0 flex-col gap-2">

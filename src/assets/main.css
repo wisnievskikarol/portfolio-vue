@@ -2,35 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Maślany design system tokens (https://claude.ai/artifact/TSZXuxA99c2rB3pGAsntFv) */
+/* Design tokens: Maślany structure, white + lime palette */
 @layer base {
   :root {
-    --surface-100: #fff8de;
-    --surface-glow: #ffee8c;
-    --butter: #ffec85;
-    --on-butter: #1e0907;
-    --yolk: #ffe94a;
-    --ink: #1e0907;
-    --ink-muted: #5e4b3c;
-    --primary: #1e0907;
-    --on-primary: #fff8de;
-    --hairline: #e9ddb0;
-    --focus: #1e0907;
-    --scrim: rgba(30, 9, 7, 0.32);
+    --surface-100: #ffffff;
+    --surface-glow: #ffffff;
+    --butter: #f2f2f2;
+    --on-butter: #0d0d0d;
+    --yolk: #e2f54b;
+    --on-yolk: #0d0d0d;
+    --ink: #0d0d0d;
+    --ink-muted: #5c5c5c;
+    --primary: #0d0d0d;
+    --on-primary: #ffffff;
+    --hairline: #ececec;
+    --focus: #0d0d0d;
+    --scrim: rgba(13, 13, 13, 0.32);
     color-scheme: light;
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --surface-100: #1a0f0b;
-      --surface-glow: #2b1d0e;
-      --butter: #ffe57a;
-      --ink: #fff3cf;
-      --ink-muted: #c9b89a;
-      --primary: #fff3cf;
-      --on-primary: #1e0907;
-      --hairline: #3a2a1e;
-      --focus: #ffe94a;
+      --surface-100: #0d0d0d;
+      --surface-glow: #0d0d0d;
+      --butter: #1f1f1f;
+      --on-butter: #f5f5f5;
+      --ink: #f5f5f5;
+      --ink-muted: #a3a3a3;
+      --primary: #e2f54b;
+      --on-primary: #0d0d0d;
+      --hairline: #2a2a2a;
+      --focus: #e2f54b;
       --scrim: rgba(0, 0, 0, 0.4);
       color-scheme: dark;
     }
@@ -47,7 +49,7 @@
 
   ::selection {
     background-color: var(--yolk);
-    color: var(--on-butter);
+    color: var(--on-yolk);
   }
 
   :focus-visible {
